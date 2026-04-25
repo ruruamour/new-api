@@ -869,7 +869,7 @@ html:not(.dark) .home-bg-texture::before {
   background-image: url('/home-flower-bg.png?v=10');
   background-repeat: no-repeat;
   background-position: right -40px top -30px;
-  background-size: 850px auto; 
+  background-size: 850px auto;
   mix-blend-mode: multiply;
   opacity: 0.28;
   -webkit-mask-image: linear-gradient(to bottom left, black 25%, transparent 65%);

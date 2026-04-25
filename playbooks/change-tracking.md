@@ -47,4 +47,3 @@ git status -sb
 Before a rebase, commit only the intended work in focused commits. Avoid
 `git add .` in this repository because the working tree often contains local
 runtime artifacts.
-
