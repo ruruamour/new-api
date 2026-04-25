@@ -8,6 +8,33 @@ import (
 	"github.com/QuantumNous/new-api/types"
 )
 
+var matchingModelAliasGroups = [][]string{
+	{"claude-4.6-sonnet", "claude-sonnet-4.6", "claude-sonnet-4-6"},
+}
+
+var matchingModelAliasMap = func() map[string][]string {
+	aliasMap := make(map[string][]string, len(matchingModelAliasGroups)*3)
+	for _, group := range matchingModelAliasGroups {
+		groupCopy := append([]string(nil), group...)
+		for _, name := range group {
+			aliasMap[name] = groupCopy
+		}
+	}
+	return aliasMap
+}()
+
+var exactPricingModelAliases = map[string]string{
+	"DeepSeek-V3.2": "deepseek-chat",
+	"GPT-5":         "gpt-5",
+	"GPT-5.1":       "gpt-5.1",
+	"GPT-5.1 Codex": "gpt-5.1-codex",
+	"GPT-5.2":       "gpt-5.2",
+	"GPT-5.2 Codex": "gpt-5.2-codex",
+	"GPT-5.3":       "gpt-5.3",
+	"GPT-5.3 Codex": "gpt-5.3-codex",
+	"deepseek-r1":   "deepseek-reasoner",
+}
+
 // from songquanpeng/one-api
 const (
 	USD2RMB = 7.3 // 暂定 1 USD = 7.3 RMB
@@ -91,9 +118,22 @@ var defaultModelRatio = map[string]float64{
 	"gpt-4-turbo-2024-04-09":           5, // $0.01 / 1K tokens
 	"gpt-4.5-preview":                  37.5,
 	"gpt-4.5-preview-2025-02-27":       37.5,
+	"gpt-5.4":                          1.25,
+	"gpt-5.4-2026-03-05":               1.25,
+	"gpt-5.4-mini":                     0.375,
+	"gpt-5.4-nano":                     0.1,
 	"gpt-5":                            0.625,
 	"gpt-5-2025-08-07":                 0.625,
 	"gpt-5-chat-latest":                0.625,
+	"gpt-5.1":                          0.625,
+	"gpt-5.1-2025-11-13":               0.625,
+	"gpt-5.1-codex":                    0.625,
+	"gpt-5.2":                          0.875,
+	"gpt-5.2-2025-12-11":               0.875,
+	"gpt-5.2-codex":                    0.875,
+	"gpt-5.3":                          0.875,
+	"gpt-5.3-chat-latest":              0.875,
+	"gpt-5.3-codex":                    0.875,
 	"gpt-5-mini":                       0.125,
 	"gpt-5-mini-2025-08-07":            0.125,
 	"gpt-5-nano":                       0.025,
@@ -180,12 +220,19 @@ var defaultModelRatio = map[string]float64{
 	"gemini-2.5-flash-preview-05-20-nothinking": 0.075,
 	"gemini-2.5-flash-thinking-*":               0.075, // 用于为后续所有2.5 flash thinking budget 模型设置默认倍率
 	"gemini-2.5-pro-thinking-*":                 0.625, // 用于为后续所有2.5 pro thinking budget 模型设置默认倍率
+	"gemini-2.5-flash-lite":                     0.05,
 	"gemini-2.5-flash-lite-preview-thinking-*":  0.05,
+	"gemini-2.5-flash-lite-preview":             0.05,
 	"gemini-2.5-flash-lite-preview-06-17":       0.05,
 	"gemini-2.5-flash":                          0.15,
+	"gemini-3-flash-preview":                    0.25,
+	"gemini-3-pro-preview":                      1.0,
+	"gemini-3.1-flash-lite-preview":             0.125,
+	"gemini-3.1-pro-preview":                    1.0,
+	"gemini-3.1-pro-preview-customtools":        1.0,
 	"gemini-robotics-er-1.5-preview":            0.15,
 	"gemini-embedding-001":                      0.075,
-	"text-embedding-004":                        0.001,
+	"text-embedding-004":                        0.075,
 	"chatglm_turbo":                             0.3572,     // ￥0.005 / 1k tokens
 	"chatglm_pro":                               0.7143,     // ￥0.01 / 1k tokens
 	"chatglm_std":                               0.3572,     // ￥0.005 / 1k tokens
@@ -240,23 +287,40 @@ var defaultModelRatio = map[string]float64{
 	"command-r-plus":         1.5,
 	"command-r-08-2024":      0.075,
 	"command-r-plus-08-2024": 1.25,
-	"deepseek-chat":          0.27 / 2,
+	"deepseek-chat":          0.28 / 2,
 	"deepseek-coder":         0.27 / 2,
-	"deepseek-reasoner":      0.55 / 2, // 0.55 / 1k tokens
+	"deepseek-reasoner":      0.28 / 2,
 	// Perplexity online 模型对搜索额外收费，有需要应自行调整，此处不计入搜索费用
 	"llama-3-sonar-small-32k-chat":   0.2 / 1000 * USD,
 	"llama-3-sonar-small-32k-online": 0.2 / 1000 * USD,
 	"llama-3-sonar-large-32k-chat":   1 / 1000 * USD,
 	"llama-3-sonar-large-32k-online": 1 / 1000 * USD,
 	// grok
-	"grok-3-beta":           1.5,
-	"grok-3-mini-beta":      0.15,
-	"grok-2":                1,
-	"grok-2-vision":         1,
-	"grok-beta":             2.5,
-	"grok-vision-beta":      2.5,
-	"grok-3-fast-beta":      2.5,
-	"grok-3-mini-fast-beta": 0.3,
+	"grok-3-beta":                        1.5,
+	"grok-3-mini-beta":                   0.15,
+	"grok-2":                             1,
+	"grok-2-vision":                      1,
+	"grok-beta":                          2.5,
+	"grok-vision-beta":                   2.5,
+	"grok-3-fast-beta":                   2.5,
+	"grok-3-mini-fast-beta":              0.3,
+	"grok-4":                             1.0,
+	"grok-4-heavy":                       1.0,
+	"grok-4.1":                           0.1,
+	"grok-4.1-expert":                    0.1,
+	"grok-4.2":                           1.0,
+	"kimi-k2.5":                          0.3,
+	"MiniMax-M2.5":                       0.15,
+	"MiniMax-M2.7":                       0.15,
+	"mistral-large-3-675b-instruct-2512": 0.25,
+	"mistral-large-3:675b-cloud":         0.25,
+	"mistral-medium-3-instruct":          0.2,
+	"voyage-3-lite":                      0.01,
+	"voyage-4":                           0.03,
+	"voyage-4-large":                     0.06,
+	"voyage-4-lite":                      0.01,
+	"voyage-code-2":                      0.06,
+	"voyage-code-3":                      0.09,
 	// submodel
 	"NousResearch/Hermes-4-405B-FP8":          0.8,
 	"Qwen/Qwen3-235B-A22B-Thinking-2507":      0.6,
@@ -327,10 +391,37 @@ var modelRatioMap = types.NewRWMap[string, float64]()
 var completionRatioMap = types.NewRWMap[string, float64]()
 
 var defaultCompletionRatio = map[string]float64{
-	"gpt-4-gizmo-*":  2,
-	"gpt-4o-gizmo-*": 3,
-	"gpt-4-all":      2,
-	"gpt-image-1":    8,
+	"gpt-4-gizmo-*":                      2,
+	"gpt-4o-gizmo-*":                     3,
+	"gpt-4-all":                          2,
+	"gpt-image-1":                        8,
+	"bce-embedding-base_v1":              0,
+	"bce-reranker-base_v1":               0,
+	"bge-large-en-v1.5":                  0,
+	"bge-large-zh-v1.5":                  0,
+	"bge-m3":                             0,
+	"deepseek-chat":                      1.5,
+	"deepseek-reasoner":                  1.5,
+	"gemini-3-flash-preview":             6,
+	"gemini-3.1-flash-lite-preview":      6,
+	"gemini-3.1-pro-preview":             6,
+	"gemini-3.1-pro-preview-customtools": 6,
+	"gemini-embedding-001":               0,
+	"grok-4":                             3,
+	"grok-4-heavy":                       3,
+	"grok-4.1":                           2.5,
+	"grok-4.1-expert":                    2.5,
+	"grok-4.2":                           3,
+	"kimi-k2.5":                          5,
+	"MiniMax-M2.5":                       4,
+	"MiniMax-M2.7":                       4,
+	"text-embedding-004":                 0,
+	"voyage-3-lite":                      0,
+	"voyage-4":                           0,
+	"voyage-4-large":                     0,
+	"voyage-4-lite":                      0,
+	"voyage-code-2":                      0,
+	"voyage-code-3":                      0,
 }
 
 // InitRatioSettings initializes all model related settings maps
@@ -509,6 +600,9 @@ func getHardcodedCompletionModelRatio(name string) (float64, bool) {
 		}
 		// gpt-5 匹配
 		if strings.HasPrefix(name, "gpt-5") {
+			if strings.HasPrefix(name, "gpt-5.4-nano") {
+				return 6.25, true
+			}
 			if strings.HasPrefix(name, "gpt-5.4") {
 				return 6, true
 			}
@@ -548,6 +642,9 @@ func getHardcodedCompletionModelRatio(name string) (float64, bool) {
 		}
 		return 4.0 / 3.0, true
 	}
+	if strings.HasPrefix(name, "mistral-medium-3") {
+		return 5, true
+	}
 	if strings.HasPrefix(name, "mistral-") {
 		return 3, true
 	}
@@ -571,6 +668,12 @@ func getHardcodedCompletionModelRatio(name string) (float64, bool) {
 			return 2.5 / 0.3, false
 		} else if strings.HasPrefix(name, "gemini-robotics-er-1.5") {
 			return 2.5 / 0.3, false
+		} else if strings.HasPrefix(name, "gemini-3.1-pro") {
+			return 6, false
+		} else if strings.HasPrefix(name, "gemini-3.1-flash-lite") {
+			return 6, false
+		} else if strings.HasPrefix(name, "gemini-3-flash") {
+			return 6, false
 		} else if strings.HasPrefix(name, "gemini-3-pro") {
 			if strings.HasPrefix(name, "gemini-3-pro-image") {
 				return 60, false
@@ -699,6 +802,9 @@ func GetCompletionRatioCopy() map[string]float64 {
 
 // 转换模型名，减少渠道必须配置各种带参数模型
 func FormatMatchingModelName(name string) string {
+	if alias, ok := exactPricingModelAliases[name]; ok {
+		name = alias
+	}
 
 	if strings.HasPrefix(name, "gemini-2.5-flash-lite") {
 		name = handleThinkingBudgetModel(name, "gemini-2.5-flash-lite", "gemini-2.5-flash-lite-thinking-*")
@@ -715,6 +821,41 @@ func FormatMatchingModelName(name string) string {
 		name = "gpt-4o-gizmo-*"
 	}
 	return name
+}
+
+// GetMatchingModelNames returns all model names that should be treated as the same
+// channel-matching target during ability selection.
+func GetMatchingModelNames(name string) []string {
+	if name == "" {
+		return nil
+	}
+
+	seen := make(map[string]struct{}, 4)
+	names := make([]string, 0, 4)
+	appendName := func(candidate string) {
+		if candidate == "" {
+			return
+		}
+		if aliases, ok := matchingModelAliasMap[candidate]; ok {
+			for _, alias := range aliases {
+				if _, exists := seen[alias]; exists {
+					continue
+				}
+				seen[alias] = struct{}{}
+				names = append(names, alias)
+			}
+			return
+		}
+		if _, exists := seen[candidate]; exists {
+			return
+		}
+		seen[candidate] = struct{}{}
+		names = append(names, candidate)
+	}
+
+	appendName(name)
+	appendName(FormatMatchingModelName(name))
+	return names
 }
 
 // result: 倍率or价格， usePrice， exist
