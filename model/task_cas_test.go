@@ -34,7 +34,18 @@ func TestMain(m *testing.M) {
 	}
 	sqlDB.SetMaxOpenConns(1)
 
-	if err := db.AutoMigrate(&Task{}, &User{}, &Token{}, &Log{}, &Channel{}, &Ability{}); err != nil {
+	if err := db.AutoMigrate(
+		&Task{},
+		&User{},
+		&Token{},
+		&Log{},
+		&Channel{},
+		&Ability{},
+		&TopUp{},
+		&SubscriptionPlan{},
+		&SubscriptionOrder{},
+		&UserSubscription{},
+	); err != nil {
 		panic("failed to migrate: " + err.Error())
 	}
 
@@ -54,6 +65,10 @@ func truncateTables(t *testing.T) {
 		group2model2channels = nil
 		channelsIDM = nil
 		channelSyncLock.Unlock()
+		DB.Exec("DELETE FROM top_ups")
+		DB.Exec("DELETE FROM subscription_orders")
+		DB.Exec("DELETE FROM subscription_plans")
+		DB.Exec("DELETE FROM user_subscriptions")
 	})
 }
 

@@ -134,7 +134,7 @@ const Home = () => {
               {/* 品牌 Hero */}
               <div className='text-center mb-12 md:mb-16'>
                 <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold text-semi-color-text-0 mb-4'>
-                  {statusState?.status?.system_name || '糯叽叽 API'}
+                  {statusState?.status?.system_name || 'New API'}
                 </h1>
                 <p className='text-base md:text-lg text-semi-color-text-2 max-w-md mx-auto tracking-widest'>
                   一念流转，万象生花
