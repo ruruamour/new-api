@@ -12,6 +12,28 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+func guessMimeTypeFromFilename(filename string) string {
+	dot := strings.LastIndex(filename, ".")
+	if dot == -1 || dot+1 >= len(filename) {
+		return ""
+	}
+	switch strings.ToLower(filename[dot+1:]) {
+	case "pdf":
+		return "application/pdf"
+	case "txt", "md", "markdown", "csv", "json", "xml", "html", "htm":
+		return "text/plain"
+	case "jpg", "jpeg":
+		return "image/jpeg"
+	case "png":
+		return "image/png"
+	case "gif":
+		return "image/gif"
+	case "webp":
+		return "image/webp"
+	}
+	return ""
+}
+
 type ResponseFormat struct {
 	Type       string          `json:"type,omitempty"`
 	JsonSchema json.RawMessage `json:"json_schema,omitempty"`
@@ -386,7 +408,8 @@ func (m *MediaContent) ToFileSource() types.FileSource {
 		if file == nil || file.FileData == "" {
 			return nil
 		}
-		return types.NewFileSourceFromData(file.FileData, "")
+		mimeType := guessMimeTypeFromFilename(file.FileName)
+		return types.NewFileSourceFromData(file.FileData, mimeType)
 	case ContentTypeVideoUrl:
 		video := m.GetVideoUrl()
 		if video == nil || video.Url == "" {

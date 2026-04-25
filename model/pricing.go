@@ -293,16 +293,25 @@ func updatePricing() {
 			SupportedEndpointTypes: modelSupportEndpointTypes[model],
 		}
 
+		billingMode := billing_setting.GetBillingMode(model)
+		billingExpr, hasBillingExpr := billing_setting.GetBillingExpr(model)
+		hasTieredMode := billingMode == "tiered_expr"
+		hasValidTieredExpr := hasTieredMode && hasBillingExpr && strings.TrimSpace(billingExpr) != ""
+
 		// 补充模型元数据（描述、标签、供应商、状态）
-		// 若 models 表中无记录，或模型被禁用(status!=1)，则直接跳过，不返回给前端（白名单模式）
+		// 若 models 表中无记录，普通模型按白名单模式跳过；tiered 模型保留在 pricing 中供前端展示校验状态。
 		meta, ok := metaMap[model]
-		if !ok || meta.Status != 1 {
+		if ok {
+			if meta.Status != 1 {
+				continue
+			}
+			pricing.Description = meta.Description
+			pricing.Icon = meta.Icon
+			pricing.Tags = meta.Tags
+			pricing.VendorID = meta.VendorID
+		} else if !hasTieredMode {
 			continue
 		}
-		pricing.Description = meta.Description
-		pricing.Icon = meta.Icon
-		pricing.Tags = meta.Tags
-		pricing.VendorID = meta.VendorID
 		modelPrice, findPrice := ratio_setting.GetModelPrice(model, false)
 		if findPrice {
 			pricing.ModelPrice = modelPrice
@@ -330,11 +339,9 @@ func updatePricing() {
 			audioCompletionRatio := ratio_setting.GetAudioCompletionRatio(model)
 			pricing.AudioCompletionRatio = &audioCompletionRatio
 		}
-		if billingMode := billing_setting.GetBillingMode(model); billingMode == "tiered_expr" {
-			if expr, ok := billing_setting.GetBillingExpr(model); ok && strings.TrimSpace(expr) != "" {
-				pricing.BillingMode = billingMode
-				pricing.BillingExpr = expr
-			}
+		if hasValidTieredExpr {
+			pricing.BillingMode = billingMode
+			pricing.BillingExpr = billingExpr
 		}
 		pricingMap = append(pricingMap, pricing)
 	}
