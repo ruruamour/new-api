@@ -39,12 +39,12 @@ const CONFIG = {
 
 const THEME_COLORS = {
   allVendors: {
-    primary: '37 99 235',
-    background: 'rgba(59, 130, 246, 0.08)',
+    primary: '45 106 79',
+    background: 'rgba(45, 106, 79, 0.08)',
   },
   specific: {
-    primary: '16 185 129',
-    background: 'rgba(16, 185, 129, 0.1)',
+    primary: '27 67 50',
+    background: 'rgba(27, 67, 50, 0.10)',
   },
 };
 
@@ -260,12 +260,18 @@ const PricingVendorIntro = memo(
     );
 
     const createCoverStyle = useCallback(
-      (primaryColor) => ({
-        '--palette-primary-darkerChannel': primaryColor,
-        backgroundImage: `linear-gradient(0deg, rgba(var(--palette-primary-darkerChannel) / 80%), rgba(var(--palette-primary-darkerChannel) / 80%)), url('/cover-4.webp')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
+      () => ({
+        backgroundImage: `
+          url('/flower-pattern-dense.png'),
+          radial-gradient(ellipse at 20% 50%, #5BB685 0%, transparent 70%),
+          radial-gradient(ellipse at 80% 20%, #4A9B6F 0%, transparent 60%),
+          radial-gradient(ellipse at 60% 80%, #3D8A5E 0%, transparent 65%),
+          linear-gradient(135deg, #3A8F62, #2E7250)
+        `,
+        backgroundBlendMode: 'soft-light, normal, normal, normal, normal',
+        backgroundRepeat: 'repeat, no-repeat, no-repeat, no-repeat, no-repeat',
+        backgroundSize: '500px, cover, cover, cover, cover',
+        backgroundPosition: 'center, center, center, center, center',
       }),
       [],
     );

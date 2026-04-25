@@ -1,0 +1,348 @@
+/*
+Copyright (C) 2025 QuantumNous
+
+Theme: Minimal Light (极简白)
+Style: 简洁、高效、专注
+特点: 白色系、极简感、专注感
+*/
+
+/* ==================== 亮色模式 ==================== */
+:root[data-ui-theme="minimal-light"],
+[data-ui-theme="minimal-light"] {
+    /* 主色调 - 极简黑 */
+    --theme-primary: #18181B;
+    --theme-primary-hover: #27272A;
+    --theme-primary-active: #3F3F46;
+    --theme-primary-light: rgba(24, 24, 27, 0.15);
+    --theme-primary-rgb: 24, 24, 27;
+
+    /* 辅助色 */
+    --theme-secondary: #3F3F46;
+    --theme-secondary-hover: #52525B;
+    --theme-secondary-light: rgba(63, 63, 70, 0.15);
+
+    /* 背景色 */
+    --theme-bg-primary: #FFFFFF;
+    --theme-bg-secondary: #F4F4F5;
+    --theme-bg-tertiary: #E4E4E7;
+    --theme-bg-gradient: linear-gradient(135deg, #FFFFFF 0%, #F4F4F5 100%);
+
+    /* 文字色 */
+    --theme-text-primary: #18181B;
+    --theme-text-secondary: #71717A;
+    --theme-text-tertiary: #A3A3A3;
+
+    /* 边框 */
+    --theme-border: #E4E4E7;
+    --theme-border-light: #F4F4F5;
+
+    /* 状态色 */
+    --theme-success: #10B981;
+    --theme-warning: #F59E0B;
+    --theme-danger: #EF4444;
+    --theme-info: #3B82F6;
+
+    /* 圆角 */
+    --theme-radius-sm: 4px;
+    --theme-radius-md: 8px;
+    --theme-radius-lg: 12px;
+    --theme-radius-xl: 16px;
+
+    /* 阴影 */
+    --theme-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --theme-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.08);
+    --theme-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+    /* 侧边栏 */
+    --sidebar-bg: #FFFFFF;
+    --sidebar-item-hover-bg: #F4F4F5;
+    --sidebar-item-active-bg: #18181B;
+    --sidebar-item-active-color: #FFFFFF;
+
+    /* 头部 */
+    --header-bg: #FFFFFF;
+    --header-border: #E4E4E7;
+
+    /* 卡片 */
+    --card-bg: #FFFFFF;
+    --card-border: #E4E4E7;
+    --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    --card-hover-shadow: 0 8px 12px rgba(0, 0, 0, 0.08);
+
+    /* 按钮 */
+    --btn-primary-bg: linear-gradient(135deg, #18181B 0%, #3F3F46 100%);
+    --btn-primary-hover-bg: linear-gradient(135deg, #27272A 0%, #52525B 100%);
+    --btn-primary-shadow: 0 2px 8px rgba(24, 24, 27, 0.2);
+
+    /* 输入框 */
+    --input-bg: #FFFFFF;
+    --input-border: #E4E4E7;
+    --input-focus-border: #18181B;
+    --input-focus-shadow: 0 0 0 3px rgba(24, 24, 27, 0.1);
+}
+
+/* ==================== Semi Design 变量覆盖 ==================== */
+[data-ui-theme="minimal-light"] {
+    /* 主色 */
+    --semi-color-primary: #18181B;
+    --semi-color-primary-hover: #27272A;
+    --semi-color-primary-active: #3F3F46;
+    --semi-color-primary-light-default: rgba(24, 24, 27, 0.08);
+    --semi-color-primary-light-hover: rgba(24, 24, 27, 0.15);
+    --semi-color-primary-light-active: rgba(24, 24, 27, 0.22);
+
+    /* 背景色 */
+    --semi-color-bg-0: #FFFFFF;
+    --semi-color-bg-1: #F4F4F5;
+    --semi-color-bg-2: #E4E4E7;
+    --semi-color-bg-3: #D4D4D8;
+
+    /* 文字色 */
+    --semi-color-text-0: #18181B;
+    --semi-color-text-1: #27272A;
+    --semi-color-text-2: #71717A;
+    --semi-color-text-3: #A3A3A3;
+
+    /* 边框色 */
+    --semi-color-border: #E4E4E7;
+    --semi-color-border-hover: #D4D4D8;
+
+    /* 填充色 */
+    --semi-color-fill-0: #F4F4F5;
+    --semi-color-fill-1: #E4E4E7;
+    --semi-color-fill-2: #D4D4D8;
+}
+
+/* ==================== 暗色模式 ==================== */
+:root[data-ui-theme="minimal-light"][theme-mode="dark"],
+[data-ui-theme="minimal-light"][theme-mode="dark"] {
+    --theme-primary: #F4F4F5;
+    --theme-primary-hover: #E4E4E7;
+    --theme-primary-active: #D4D4D8;
+    --theme-primary-light: rgba(244, 244, 245, 0.15);
+    --theme-primary-rgb: 244, 244, 245;
+
+    --theme-secondary: #E4E4E7;
+    --theme-secondary-hover: #D4D4D8;
+    --theme-secondary-light: rgba(228, 228, 231, 0.15);
+
+    --theme-bg-primary: #000000;
+    --theme-bg-secondary: #18181B;
+    --theme-bg-tertiary: #27272A;
+    --theme-bg-gradient: linear-gradient(135deg, #000000 0%, #18181B 100%);
+
+    --theme-text-primary: #F4F4F5;
+    --theme-text-secondary: #A3A3A3;
+    --theme-text-tertiary: #71717A;
+
+    --theme-border: #27272A;
+    --theme-border-light: #18181B;
+
+    --theme-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --theme-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+    --theme-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+
+    --sidebar-bg: #18181B;
+    --sidebar-item-hover-bg: #27272A;
+    --sidebar-item-active-bg: #F4F4F5;
+    --sidebar-item-active-color: #18181B;
+
+    --header-bg: #18181B;
+    --header-border: #27272A;
+
+    --card-bg: #18181B;
+    --card-border: #27272A;
+    --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --card-hover-shadow: 0 8px 12px rgba(244, 244, 245, 0.1);
+
+    --input-bg: #27272A;
+    --input-border: #3F3F46;
+    --input-focus-border: #F4F4F5;
+    --input-focus-shadow: 0 0 0 3px rgba(244, 244, 245, 0.2);
+}
+
+/* ==================== Semi Design 暗色变量 ==================== */
+[data-ui-theme="minimal-light"][theme-mode="dark"] {
+    --semi-color-primary: #F4F4F5;
+    --semi-color-primary-hover: #E4E4E7;
+    --semi-color-primary-active: #D4D4D8;
+    --semi-color-primary-light-default: rgba(244, 244, 245, 0.15);
+    --semi-color-primary-light-hover: rgba(244, 244, 245, 0.22);
+    --semi-color-primary-light-active: rgba(244, 244, 245, 0.3);
+
+    --semi-color-bg-0: #000000;
+    --semi-color-bg-1: #18181B;
+    --semi-color-bg-2: #27272A;
+    --semi-color-bg-3: #3F3F46;
+
+    --semi-color-text-0: #F4F4F5;
+    --semi-color-text-1: #E4E4E7;
+    --semi-color-text-2: #A3A3A3;
+    --semi-color-text-3: #71717A;
+
+    --semi-color-border: #27272A;
+    --semi-color-border-hover: #3F3F46;
+
+    --semi-color-fill-0: rgba(255, 255, 255, 0.05);
+    --semi-color-fill-1: rgba(255, 255, 255, 0.08);
+    --semi-color-fill-2: rgba(255, 255, 255, 0.12);
+}
+
+/* ==================== Semi 组件样式覆盖 ==================== */
+[data-ui-theme="minimal-light"] {
+
+    /* 卡片 */
+    .semi-card,
+    .semi-card-outlined {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        box-shadow: var(--card-shadow);
+        transition: all 0.3s ease;
+    }
+
+    .semi-card:hover {
+        box-shadow: var(--card-hover-shadow);
+    }
+
+    /* 按钮 */
+    .semi-button-primary {
+        background: var(--btn-primary-bg);
+        border: none;
+        box-shadow: var(--btn-primary-shadow);
+        color: #FFFFFF;
+    }
+
+    .semi-button-primary:hover {
+        transform: translateY(-1px);
+    }
+
+    /* 输入框 */
+    .semi-input,
+    .semi-textarea {
+        background: var(--input-bg);
+        border: 1px solid var(--input-border);
+    }
+
+    .semi-input:focus,
+    .semi-textarea:focus {
+        border-color: var(--input-focus-border);
+        box-shadow: var(--input-focus-shadow);
+    }
+
+    /* 侧边栏 */
+    .semi-navigation-vertical .semi-navigation-item-selected {
+        background: var(--sidebar-item-active-bg);
+        color: var(--sidebar-item-active-color);
+    }
+
+    .semi-navigation-vertical .semi-navigation-item:hover {
+        background: var(--sidebar-item-hover-bg);
+    }
+
+    /* 头部 */
+    .semi-layout-header {
+        background: var(--header-bg);
+        border-bottom: 1px solid var(--header-border);
+    }
+
+    /* 表格 */
+    .semi-table-thead .semi-table-th {
+        background: var(--theme-bg-secondary);
+        border-bottom: 1px solid var(--theme-border);
+    }
+}
+
+/* ==================== 全局背景 ==================== */
+[data-ui-theme="minimal-light"] body {
+    background: var(--theme-bg-gradient);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* 极简装饰 */
+[data-ui-theme="minimal-light"] body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 20% 80%, rgba(24, 24, 27, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 80% 20%, rgba(63, 63, 70, 0.05) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* 卡片网格布局 */
+[data-ui-theme="minimal-light"] .card-grid {
+    display: grid;
+    gap: 20px;
+}
+
+[data-ui-theme="minimal-light"] .card-grid .semi-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-ui-theme="minimal-light"] .card-grid .semi-card:hover {
+    transform: translateY(-6px) scale(1.01);
+}
+
+/* 按钮组 */
+[data-ui-theme="minimal-light"] .semi-button-group .semi-button {
+    margin: 0 4px;
+}
+
+[data-ui-theme="minimal-light"] .semi-button-group .semi-button:hover {
+    transform: scale(1.05);
+}
+
+/* 动画效果 */
+[data-ui-theme="minimal-light"] .fade-in {
+    animation: minimal-light-fadeIn 0.3s ease;
+}
+
+@keyframes minimal-light-fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+[data-ui-theme="minimal-light"] .slide-in {
+    animation: minimal-light-slideIn 0.3s ease;
+}
+
+@keyframes minimal-light-slideIn {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+[data-ui-theme="minimal-light"] .scale-in {
+    animation: minimal-light-scaleIn 0.3s ease;
+}
+
+@keyframes minimal-light-scaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

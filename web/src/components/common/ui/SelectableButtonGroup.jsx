@@ -23,7 +23,6 @@ import { useContainerWidth } from '../../../hooks/common/useContainerWidth';
 import {
   Divider,
   Button,
-  Tag,
   Row,
   Col,
   Collapsible,
@@ -46,6 +45,7 @@ import { IconChevronDown, IconChevronUp } from '@douyinfe/semi-icons';
  * @param {number} collapseHeight 折叠时的高度，默认200
  * @param {boolean} withCheckbox 是否启用前缀 Checkbox 来控制激活状态
  * @param {boolean} loading 是否处于加载状态
+ * @param {string} variant 颜色变体: 'violet' | 'teal' | 'amber' | 'rose' | 'green'，不传则使用默认蓝色
  */
 const SelectableButtonGroup = ({
   title,
@@ -58,6 +58,8 @@ const SelectableButtonGroup = ({
   collapseHeight = 200,
   withCheckbox = false,
   loading = false,
+  variant,
+  forceShowTags = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [skeletonCount] = useState(12);
@@ -90,11 +92,12 @@ const SelectableButtonGroup = ({
   const getResponsiveConfig = () => {
     if (containerWidth <= 280) return { columns: 1, showTags: true }; // 极窄：1列+标签
     if (containerWidth <= 380) return { columns: 2, showTags: true }; // 窄屏：2列+标签
-    if (containerWidth <= 460) return { columns: 3, showTags: false }; // 中等：3列不加标签
+    if (containerWidth <= 460) return { columns: 3, showTags: false }; // 中等：3列默认隐藏标签
     return { columns: 3, showTags: true }; // 最宽：3列+标签
   };
 
-  const { columns: perRow, showTags: shouldShowTags } = getResponsiveConfig();
+  const { columns: perRow, showTags } = getResponsiveConfig();
+  const shouldShowTags = forceShowTags || showTags;
   const maxVisibleRows = Math.max(1, Math.floor(collapseHeight / 32)); // Approx row height 32
   const needCollapse = collapsible && items.length > perRow * maxVisibleRows;
   const showSkeleton = useMinimumLoadingTime(loading);
@@ -178,9 +181,6 @@ const SelectableButtonGroup = ({
   ) : (
     <Row gutter={gutterSize} style={{ lineHeight: '32px', ...style }}>
       {items.map((item) => {
-        const isDisabled =
-          item.disabled ||
-          (typeof item.tagCount === 'number' && item.tagCount === 0);
         const isActive = Array.isArray(activeValue)
           ? activeValue.includes(item.value)
           : activeValue === item.value;
@@ -194,13 +194,11 @@ const SelectableButtonGroup = ({
                 }}
                 theme={isActive ? 'light' : 'outline'}
                 type={isActive ? 'primary' : 'tertiary'}
-                disabled={isDisabled}
                 className='sbg-button'
                 icon={
                   <Checkbox
                     checked={isActive}
                     onChange={() => onChange(item.value)}
-                    disabled={isDisabled}
                     style={{ pointerEvents: 'auto' }}
                   />
                 }
@@ -210,14 +208,9 @@ const SelectableButtonGroup = ({
                   {item.icon && <span className='sbg-icon'>{item.icon}</span>}
                   <ConditionalTooltipText text={item.label} />
                   {item.tagCount !== undefined && shouldShowTags && (
-                    <Tag
-                      className='sbg-tag'
-                      color='white'
-                      shape='circle'
-                      size='small'
-                    >
+                    <span className={`sbg-badge ${isActive ? 'sbg-badge-active' : ''}`}>
                       {item.tagCount}
-                    </Tag>
+                    </span>
                   )}
                 </div>
               </Button>
@@ -231,22 +224,16 @@ const SelectableButtonGroup = ({
               onClick={() => onChange(item.value)}
               theme={isActive ? 'light' : 'outline'}
               type={isActive ? 'primary' : 'tertiary'}
-              disabled={isDisabled}
               className='sbg-button'
               style={{ width: '100%' }}
             >
               <div className='sbg-content'>
                 {item.icon && <span className='sbg-icon'>{item.icon}</span>}
                 <ConditionalTooltipText text={item.label} />
-                {item.tagCount !== undefined && shouldShowTags && (
-                  <Tag
-                    className='sbg-tag'
-                    color='white'
-                    shape='circle'
-                    size='small'
-                  >
+                {item.tagCount !== undefined && shouldShowTags && item.tagCount !== '' && (
+                  <span className={`sbg-badge ${isActive ? 'sbg-badge-active' : ''}`}>
                     {item.tagCount}
-                  </Tag>
+                  </span>
                 )}
               </div>
             </Button>
@@ -258,7 +245,7 @@ const SelectableButtonGroup = ({
 
   return (
     <div
-      className={`mb-8 ${containerWidth <= 400 ? 'sbg-compact' : ''}`}
+      className={`mb-8 ${containerWidth <= 400 ? 'sbg-compact' : ''}${variant ? ` sbg-variant-${variant}` : ''}`}
       ref={containerRef}
     >
       {title && (

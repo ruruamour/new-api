@@ -1,0 +1,358 @@
+/*
+Copyright (C) 2025 QuantumNous
+
+Theme: Corporate (企业商务)
+Style: 专业、可信、稳重
+特点: 蓝色系、专业感、稳重感
+*/
+
+/* ==================== 亮色模式 ==================== */
+:root[data-ui-theme="corporate"],
+[data-ui-theme="corporate"] {
+    /* 主色调 - 企业蓝 */
+    --theme-primary: #1E40AF;
+    --theme-primary-hover: #1E3A8A;
+    --theme-primary-active: #1E337A;
+    --theme-primary-light: rgba(30, 64, 175, 0.15);
+    --theme-primary-rgb: 30, 64, 175;
+
+    /* 辅助色 */
+    --theme-secondary: #3B82F6;
+    --theme-secondary-hover: #2563EB;
+    --theme-secondary-light: rgba(59, 130, 246, 0.15);
+
+    /* 背景色 */
+    --theme-bg-primary: #FFFFFF;
+    --theme-bg-secondary: #F8FAFC;
+    --theme-bg-tertiary: #F1F5F9;
+    --theme-bg-gradient: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+
+    /* 文字色 */
+    --theme-text-primary: #1E293B;
+    --theme-text-secondary: #64748B;
+    --theme-text-tertiary: #94A3B8;
+
+    /* 边框 */
+    --theme-border: #E2E8F0;
+    --theme-border-light: #F1F5F9;
+
+    /* 状态色 */
+    --theme-success: #10B981;
+    --theme-warning: #F59E0B;
+    --theme-danger: #EF4444;
+    --theme-info: #3B82F6;
+
+    /* 圆角 */
+    --theme-radius-sm: 6px;
+    --theme-radius-md: 10px;
+    --theme-radius-lg: 14px;
+    --theme-radius-xl: 20px;
+
+    /* 阴影 */
+    --theme-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --theme-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.08);
+    --theme-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+    /* 侧边栏 */
+    --sidebar-bg: #FFFFFF;
+    --sidebar-item-hover-bg: rgba(30, 64, 175, 0.08);
+    --sidebar-item-active-bg: #1E40AF;
+    --sidebar-item-active-color: #FFFFFF;
+
+    /* 头部 */
+    --header-bg: #FFFFFF;
+    --header-border: #E2E8F0;
+
+    /* 卡片 */
+    --card-bg: #FFFFFF;
+    --card-border: #E2E8F0;
+    --card-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    --card-hover-shadow: 0 8px 12px rgba(0, 0, 0, 0.08);
+
+    /* 按钮 */
+    --btn-primary-bg: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%);
+    --btn-primary-hover-bg: linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%);
+    --btn-primary-shadow: 0 4px 12px rgba(30, 64, 175, 0.25);
+
+    /* 输入框 */
+    --input-bg: #FFFFFF;
+    --input-border: #E2E8F0;
+    --input-focus-border: #1E40AF;
+    --input-focus-shadow: 0 0 0 3px rgba(30, 64, 175, 0.15);
+}
+
+/* ==================== Semi Design 变量覆盖 ==================== */
+[data-ui-theme="corporate"] {
+    /* 主色 */
+    --semi-color-primary: #1E40AF;
+    --semi-color-primary-hover: #1E3A8A;
+    --semi-color-primary-active: #1E337A;
+    --semi-color-primary-light-default: rgba(30, 64, 175, 0.08);
+    --semi-color-primary-light-hover: rgba(30, 64, 175, 0.15);
+    --semi-color-primary-light-active: rgba(30, 64, 175, 0.22);
+
+    /* 背景色 */
+    --semi-color-bg-0: #FFFFFF;
+    --semi-color-bg-1: #F8FAFC;
+    --semi-color-bg-2: #F1F5F9;
+    --semi-color-bg-3: #E2E8F0;
+
+    /* 文字色 */
+    --semi-color-text-0: #1E293B;
+    --semi-color-text-1: #334155;
+    --semi-color-text-2: #64748B;
+    --semi-color-text-3: #94A3B8;
+
+    /* 边框色 */
+    --semi-color-border: #E2E8F0;
+    --semi-color-border-hover: #CBD5E1;
+
+    /* 填充色 */
+    --semi-color-fill-0: #F8FAFC;
+    --semi-color-fill-1: #F1F5F9;
+    --semi-color-fill-2: #E2E8F0;
+}
+
+/* ==================== 暗色模式 ==================== */
+:root[data-ui-theme="corporate"][theme-mode="dark"],
+[data-ui-theme="corporate"][theme-mode="dark"] {
+    /* 企业商务暗色 - 深海军蓝调，区别于 dark-pro 的黑蓝 */
+    --theme-primary: #1E40AF;
+    --theme-primary-hover: #2563EB;
+    --theme-primary-active: #1E3A8A;
+    --theme-primary-light: rgba(30, 64, 175, 0.2);
+    --theme-primary-rgb: 30, 64, 175;
+
+    --theme-secondary: #3B82F6;
+    --theme-secondary-hover: #60A5FA;
+    --theme-secondary-light: rgba(59, 130, 246, 0.15);
+
+    --theme-bg-primary: #0C1A3A;
+    --theme-bg-secondary: #132045;
+    --theme-bg-tertiary: #1D2F5E;
+    --theme-bg-gradient: linear-gradient(135deg, #0C1A3A 0%, #132045 100%);
+
+    --theme-text-primary: #E8EEFF;
+    --theme-text-secondary: #93A8D4;
+    --theme-text-tertiary: #5C78A8;
+
+    --theme-border: #2A3E6A;
+    --theme-border-light: #1D2F5E;
+
+    --theme-success: #10B981;
+    --theme-warning: #F59E0B;
+    --theme-danger: #EF4444;
+    --theme-info: #3B82F6;
+
+    --theme-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --theme-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+    --theme-shadow-lg: 0 10px 24px rgba(0, 0, 0, 0.6);
+
+    --sidebar-bg: #0C1A3A;
+    --sidebar-item-hover-bg: rgba(30, 64, 175, 0.2);
+    --sidebar-item-active-bg: #1E40AF;
+    --sidebar-item-active-color: #FFFFFF;
+
+    --header-bg: #0C1A3A;
+    --header-border: #2A3E6A;
+
+    --card-bg: #132045;
+    --card-border: #2A3E6A;
+    --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    --card-hover-shadow: 0 8px 20px rgba(30, 64, 175, 0.2);
+
+    --btn-primary-bg: linear-gradient(135deg, #1E40AF 0%, #2563EB 100%);
+    --btn-primary-hover-bg: linear-gradient(135deg, #1E3A8A 0%, #1E40AF 100%);
+    --btn-primary-shadow: 0 4px 14px rgba(30, 64, 175, 0.4);
+
+    --input-bg: #1D2F5E;
+    --input-border: #2A3E6A;
+    --input-focus-border: #1E40AF;
+    --input-focus-shadow: 0 0 0 3px rgba(30, 64, 175, 0.25);
+}
+
+/* ==================== Semi Design 暗色变量 ==================== */
+[data-ui-theme="corporate"][theme-mode="dark"] {
+    --semi-color-primary: #1E40AF;
+    --semi-color-primary-hover: #2563EB;
+    --semi-color-primary-active: #1E3A8A;
+    --semi-color-primary-light-default: rgba(30, 64, 175, 0.15);
+    --semi-color-primary-light-hover: rgba(30, 64, 175, 0.22);
+    --semi-color-primary-light-active: rgba(30, 64, 175, 0.3);
+
+    --semi-color-bg-0: #0C1A3A;
+    --semi-color-bg-1: #132045;
+    --semi-color-bg-2: #1D2F5E;
+    --semi-color-bg-3: #2A3E6A;
+
+    --semi-color-text-0: #E8EEFF;
+    --semi-color-text-1: #D0DAFF;
+    --semi-color-text-2: #93A8D4;
+    --semi-color-text-3: #5C78A8;
+
+    --semi-color-border: #2A3E6A;
+    --semi-color-border-hover: #3B52A0;
+
+    --semi-color-fill-0: rgba(255, 255, 255, 0.04);
+    --semi-color-fill-1: rgba(255, 255, 255, 0.07);
+    --semi-color-fill-2: rgba(255, 255, 255, 0.1);
+}
+
+/* ==================== Semi 组件样式覆盖 ==================== */
+[data-ui-theme="corporate"] {
+
+    /* 卡片 */
+    .semi-card,
+    .semi-card-outlined {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        box-shadow: var(--card-shadow);
+        transition: all 0.3s ease;
+    }
+
+    .semi-card:hover {
+        box-shadow: var(--card-hover-shadow);
+    }
+
+    /* 按钮 */
+    .semi-button-primary {
+        background: var(--btn-primary-bg);
+        border: none;
+        box-shadow: var(--btn-primary-shadow);
+        color: #FFFFFF;
+    }
+
+    .semi-button-primary:hover {
+        transform: translateY(-1px);
+    }
+
+    /* 输入框 */
+    .semi-input,
+    .semi-textarea {
+        background: var(--input-bg);
+        border: 1px solid var(--input-border);
+    }
+
+    .semi-input:focus,
+    .semi-textarea:focus {
+        border-color: var(--input-focus-border);
+        box-shadow: var(--input-focus-shadow);
+    }
+
+    /* 侧边栏 */
+    .semi-navigation-vertical .semi-navigation-item-selected {
+        background: var(--sidebar-item-active-bg);
+        color: var(--sidebar-item-active-color);
+    }
+
+    .semi-navigation-vertical .semi-navigation-item:hover {
+        background: var(--sidebar-item-hover-bg);
+    }
+
+    /* 头部 */
+    .semi-layout-header {
+        background: var(--header-bg);
+        border-bottom: 1px solid var(--header-border);
+    }
+
+    /* 表格 */
+    .semi-table-thead .semi-table-th {
+        background: var(--theme-bg-secondary);
+        border-bottom: 1px solid var(--theme-border);
+    }
+}
+
+/* ==================== 全局背景 ==================== */
+[data-ui-theme="corporate"] body {
+    background: var(--theme-bg-gradient);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* 企业商务装饰 */
+[data-ui-theme="corporate"] body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 20% 80%, rgba(30, 64, 175, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* 卡片网格布局 */
+[data-ui-theme="corporate"] .card-grid {
+    display: grid;
+    gap: 20px;
+}
+
+[data-ui-theme="corporate"] .card-grid .semi-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-ui-theme="corporate"] .card-grid .semi-card:hover {
+    transform: translateY(-6px) scale(1.01);
+}
+
+/* 按钮组 */
+[data-ui-theme="corporate"] .semi-button-group .semi-button {
+    margin: 0 4px;
+}
+
+[data-ui-theme="corporate"] .semi-button-group .semi-button:hover {
+    transform: scale(1.05);
+}
+
+/* 动画效果 */
+[data-ui-theme="corporate"] .fade-in {
+    animation: corporate-fadeIn 0.3s ease;
+}
+
+@keyframes corporate-fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+[data-ui-theme="corporate"] .slide-in {
+    animation: corporate-slideIn 0.3s ease;
+}
+
+@keyframes corporate-slideIn {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+[data-ui-theme="corporate"] .scale-in {
+    animation: corporate-scaleIn 0.3s ease;
+}
+
+@keyframes corporate-scaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

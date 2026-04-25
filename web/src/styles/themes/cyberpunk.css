@@ -1,0 +1,469 @@
+/*
+Copyright (C) 2025 QuantumNous
+
+Theme: Cyberpunk (赛博朋克)
+Style: 未来、科技、炫酷
+特点: 霓虹光、渐变边框、动画效果
+*/
+
+/* ==================== 暗色模式 ==================== */
+:root[data-ui-theme="cyberpunk"][theme-mode="dark"],
+[data-ui-theme="cyberpunk"][theme-mode="dark"] {
+    /* 主色调 - 霓虹青 */
+    --theme-primary: #00FFFF;
+    --theme-primary-hover: #00CCCC;
+    --theme-primary-active: #009999;
+    --theme-primary-light: rgba(0, 255, 255, 0.15);
+    --theme-primary-rgb: 0, 255, 255;
+
+    /* 辅助色 */
+    --theme-secondary: #FF00FF;
+    --theme-secondary-hover: #CC00CC;
+    --theme-secondary-light: rgba(255, 0, 255, 0.15);
+
+    /* 背景色 */
+    --theme-bg-primary: #0A0A0F;
+    --theme-bg-secondary: #14141E;
+    --theme-bg-tertiary: #1E1E2E;
+    --theme-bg-gradient: linear-gradient(135deg, #0A0A0F 0%, #14141E 100%);
+
+    /* 文字色 */
+    --theme-text-primary: #E0E0E0;
+    --theme-text-secondary: #A0A0A0;
+    --theme-text-tertiary: #606060;
+
+    /* 边框 */
+    --theme-border: rgba(0, 255, 255, 0.3);
+    --theme-border-light: rgba(0, 255, 255, 0.1);
+
+    /* 状态色 */
+    --theme-success: #00FF00;
+    --theme-warning: #FFFF00;
+    --theme-danger: #FF0000;
+    --theme-info: #00FFFF;
+
+    /* 圆角 */
+    --theme-radius-sm: 4px;
+    --theme-radius-md: 8px;
+    --theme-radius-lg: 12px;
+    --theme-radius-xl: 16px;
+
+    /* 阴影 */
+    --theme-shadow-sm: 0 0 8px rgba(0, 255, 255, 0.3);
+    --theme-shadow-md: 0 0 16px rgba(0, 255, 255, 0.5);
+    --theme-shadow-lg: 0 0 24px rgba(0, 255, 255, 0.7);
+
+    /* 侧边栏 */
+    --sidebar-bg: #0F0F16;
+    --sidebar-item-hover-bg: rgba(0, 255, 255, 0.1);
+    --sidebar-item-active-bg: #00FFFF;
+    --sidebar-item-active-color: #000000;
+
+    /* 头部 */
+    --header-bg: #0F0F16;
+    --header-border: rgba(0, 255, 255, 0.3);
+
+    /* 卡片 */
+    --card-bg: #14141E;
+    --card-border: rgba(0, 255, 255, 0.3);
+    --card-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
+    --card-hover-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+
+    /* 按钮 */
+    --btn-primary-bg: linear-gradient(135deg, #00FFFF 0%, #00CCCC 100%);
+    --btn-primary-hover-bg: linear-gradient(135deg, #00CCCC 0%, #009999 100%);
+    --btn-primary-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+
+    /* 输入框 */
+    --input-bg: #0F0F16;
+    --input-border: rgba(0, 255, 255, 0.3);
+    --input-focus-border: #00FFFF;
+    --input-focus-shadow: 0 0 0 3px rgba(0, 255, 255, 0.3);
+}
+
+/* ==================== Semi Design 暗色变量 ==================== */
+[data-ui-theme="cyberpunk"][theme-mode="dark"] {
+    /* 主色 */
+    --semi-color-primary: #00FFFF;
+    --semi-color-primary-hover: #00CCCC;
+    --semi-color-primary-active: #009999;
+    --semi-color-primary-light-default: rgba(0, 255, 255, 0.15);
+    --semi-color-primary-light-hover: rgba(0, 255, 255, 0.22);
+    --semi-color-primary-light-active: rgba(0, 255, 255, 0.3);
+
+    --semi-color-bg-0: #0A0A0F;
+    --semi-color-bg-1: #14141E;
+    --semi-color-bg-2: #1E1E2E;
+    --semi-color-bg-3: #2A2A3E;
+
+    --semi-color-text-0: #E0E0E0;
+    --semi-color-text-1: #F0F0F0;
+    --semi-color-text-2: #A0A0A0;
+    --semi-color-text-3: #606060;
+
+    --semi-color-border: rgba(0, 255, 255, 0.3);
+    --semi-color-border-hover: rgba(0, 255, 255, 0.5);
+
+    --semi-color-fill-0: rgba(0, 255, 255, 0.05);
+    --semi-color-fill-1: rgba(0, 255, 255, 0.08);
+    --semi-color-fill-2: rgba(0, 255, 255, 0.12);
+}
+
+/* ==================== 亮色模式 ==================== */
+:root[data-ui-theme="cyberpunk"],
+[data-ui-theme="cyberpunk"] {
+    /* 主色调 - 霓虹青 */
+    --theme-primary: #00FFFF;
+    --theme-primary-hover: #00CCCC;
+    --theme-primary-active: #009999;
+    --theme-primary-light: rgba(0, 255, 255, 0.15);
+    --theme-primary-rgb: 0, 255, 255;
+
+    /* 辅助色 */
+    --theme-secondary: #FF00FF;
+    --theme-secondary-hover: #CC00CC;
+    --theme-secondary-light: rgba(255, 0, 255, 0.15);
+
+    /* 背景色 */
+    --theme-bg-primary: #0A0A0F;
+    --theme-bg-secondary: #14141E;
+    --theme-bg-tertiary: #1E1E2E;
+    --theme-bg-gradient: linear-gradient(135deg, #0A0A0F 0%, #14141E 100%);
+
+    /* 文字色 */
+    --theme-text-primary: #E0E0E0;
+    --theme-text-secondary: #A0A0A0;
+    --theme-text-tertiary: #606060;
+
+    /* 边框 */
+    --theme-border: rgba(0, 255, 255, 0.3);
+    --theme-border-light: rgba(0, 255, 255, 0.1);
+
+    /* 状态色 */
+    --theme-success: #00FF00;
+    --theme-warning: #FFFF00;
+    --theme-danger: #FF0000;
+    --theme-info: #00FFFF;
+
+    /* 圆角 */
+    --theme-radius-sm: 4px;
+    --theme-radius-md: 8px;
+    --theme-radius-lg: 12px;
+    --theme-radius-xl: 16px;
+
+    /* 阴影 */
+    --theme-shadow-sm: 0 0 8px rgba(0, 255, 255, 0.3);
+    --theme-shadow-md: 0 0 16px rgba(0, 255, 255, 0.5);
+    --theme-shadow-lg: 0 0 24px rgba(0, 255, 255, 0.7);
+
+    /* 侧边栏 */
+    --sidebar-bg: #0F0F16;
+    --sidebar-item-hover-bg: rgba(0, 255, 255, 0.1);
+    --sidebar-item-active-bg: #00FFFF;
+    --sidebar-item-active-color: #000000;
+
+    /* 头部 */
+    --header-bg: #0F0F16;
+    --header-border: rgba(0, 255, 255, 0.3);
+
+    /* 卡片 */
+    --card-bg: #14141E;
+    --card-border: rgba(0, 255, 255, 0.3);
+    --card-shadow: 0 0 12px rgba(0, 255, 255, 0.3);
+    --card-hover-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+
+    /* 按钮 */
+    --btn-primary-bg: linear-gradient(135deg, #00FFFF 0%, #00CCCC 100%);
+    --btn-primary-hover-bg: linear-gradient(135deg, #00CCCC 0%, #009999 100%);
+    --btn-primary-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+
+    /* 输入框 */
+    --input-bg: #0F0F16;
+    --input-border: rgba(0, 255, 255, 0.3);
+    --input-focus-border: #00FFFF;
+    --input-focus-shadow: 0 0 0 3px rgba(0, 255, 255, 0.3);
+}
+
+/* ==================== Semi Design 变量覆盖 ==================== */
+[data-ui-theme="cyberpunk"] {
+    /* 主色 */
+    --semi-color-primary: #00FFFF;
+    --semi-color-primary-hover: #00CCCC;
+    --semi-color-primary-active: #009999;
+    --semi-color-primary-light-default: rgba(0, 255, 255, 0.08);
+    --semi-color-primary-light-hover: rgba(0, 255, 255, 0.15);
+    --semi-color-primary-light-active: rgba(0, 255, 255, 0.22);
+
+    /* 背景色 */
+    --semi-color-bg-0: #0A0A0F;
+    --semi-color-bg-1: #14141E;
+    --semi-color-bg-2: #1E1E2E;
+    --semi-color-bg-3: #2A2A3E;
+
+    /* 文字色 */
+    --semi-color-text-0: #E0E0E0;
+    --semi-color-text-1: #F0F0F0;
+    --semi-color-text-2: #A0A0A0;
+    --semi-color-text-3: #606060;
+
+    /* 边框色 */
+    --semi-color-border: rgba(0, 255, 255, 0.3);
+    --semi-color-border-hover: rgba(0, 255, 255, 0.5);
+
+    /* 填充色 */
+    --semi-color-fill-0: rgba(0, 255, 255, 0.05);
+    --semi-color-fill-1: rgba(0, 255, 255, 0.08);
+    --semi-color-fill-2: rgba(0, 255, 255, 0.12);
+}
+
+/* ==================== 全局背景 ==================== */
+[data-ui-theme="cyberpunk"] body {
+    background: var(--theme-bg-gradient);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* 赛博朋克网格装饰 */
+[data-ui-theme="cyberpunk"] body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        linear-gradient(rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 255, 0.05) 1px, transparent 1px),
+        radial-gradient(circle at 50% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 50%);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* 扫描线效果 */
+[data-ui-theme="cyberpunk"] body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.3;
+}
+
+/* ==================== Semi 组件样式覆盖 ==================== */
+[data-ui-theme="cyberpunk"] {
+
+    /* 卡片 */
+    .semi-card,
+    .semi-card-outlined {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        box-shadow: var(--card-shadow);
+        transition: all 0.3s ease;
+    }
+
+    .semi-card:hover {
+        box-shadow: var(--card-hover-shadow);
+        border-color: var(--theme-primary);
+    }
+
+    /* 按钮 */
+    .semi-button-primary {
+        background: var(--btn-primary-bg);
+        border: none;
+        box-shadow: var(--btn-primary-shadow);
+        transition: all 0.3s ease;
+        color: #000000;
+    }
+
+    .semi-button-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+    }
+
+    /* 输入框 */
+    .semi-input,
+    .semi-textarea {
+        background: var(--input-bg);
+        border: 1px solid var(--input-border);
+        transition: all 0.3s ease;
+        color: var(--theme-text-primary);
+    }
+
+    .semi-input:focus,
+    .semi-textarea:focus {
+        border-color: var(--input-focus-border);
+        box-shadow: var(--input-focus-shadow);
+    }
+
+    /* 侧边栏 */
+    .semi-navigation-vertical .semi-navigation-item-selected {
+        background: var(--sidebar-item-active-bg);
+        color: var(--sidebar-item-active-color);
+    }
+
+    .semi-navigation-vertical .semi-navigation-item:hover {
+        background: var(--sidebar-item-hover-bg);
+    }
+
+    /* 头部 */
+    .semi-layout-header {
+        background: var(--header-bg);
+        border-bottom: 1px solid var(--header-border);
+    }
+
+    /* 标签 */
+    .semi-tag {
+        background: var(--theme-primary-light);
+        border: 1px solid var(--theme-primary);
+        color: var(--theme-primary);
+    }
+
+    /* 表格 */
+    .semi-table-thead .semi-table-th {
+        background: var(--theme-bg-secondary);
+        border-bottom: 1px solid var(--theme-border);
+    }
+
+    .semi-table-tbody .semi-table-tr:hover .semi-table-td {
+        background: var(--theme-primary-light);
+    }
+}
+
+/* 卡片网格布局 */
+[data-ui-theme="cyberpunk"] .card-grid {
+    display: grid;
+    gap: 20px;
+}
+
+[data-ui-theme="cyberpunk"] .card-grid .semi-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+[data-ui-theme="cyberpunk"] .card-grid .semi-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(45deg, #00FFFF, #FF00FF);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+[data-ui-theme="cyberpunk"] .card-grid .semi-card:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 0 24px rgba(0, 255, 255, 0.7);
+}
+
+/* 按钮组 */
+[data-ui-theme="cyberpunk"] .semi-button-group .semi-button {
+    margin: 0 4px;
+}
+
+[data-ui-theme="cyberpunk"] .semi-button-group .semi-button:hover {
+    transform: scale(1.05);
+}
+
+/* 动画效果 */
+[data-ui-theme="cyberpunk"] .fade-in {
+    animation: cyberpunk-fadeIn 0.3s ease;
+}
+
+@keyframes cyberpunk-fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+[data-ui-theme="cyberpunk"] .slide-in {
+    animation: cyberpunk-slideIn 0.3s ease;
+}
+
+@keyframes cyberpunk-slideIn {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+[data-ui-theme="cyberpunk"] .scale-in {
+    animation: cyberpunk-scaleIn 0.3s ease;
+}
+
+@keyframes cyberpunk-scaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 霓虹闪烁动画 */
+[data-ui-theme="cyberpunk"] .neon-pulse {
+    animation: cyberpunk-neonPulse 2s ease-in-out infinite;
+}
+
+@keyframes cyberpunk-neonPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 16px rgba(0, 255, 255, 0.6);
+    }
+}
+
+/* 扫描动画 */
+[data-ui-theme="cyberpunk"] .scan-line {
+    position: relative;
+    overflow: hidden;
+}
+
+[data-ui-theme="cyberpunk"] .scan-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.5), transparent);
+    animation: cyberpunk-scan 3s linear infinite;
+}
+
+@keyframes cyberpunk-scan {
+    0% {
+        top: 0;
+    }
+
+    100% {
+        top: 100%;
+    }
+}

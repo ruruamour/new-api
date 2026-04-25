@@ -67,30 +67,22 @@ var defaultVendorIcons = map[string]string{
 	"Azure":      "AzureAI",
 }
 
-// initDefaultVendorMapping 简化的默认供应商映射
+// initDefaultVendorMapping 仅为已存在的模型元数据补充默认供应商。
+//
+// 注意：这里不能为缺失 meta 的能力模型自动创建 status=1 的公开项，
+// 否则会绕过 models 表白名单控制，把所有上游能力模型直接暴露到模型广场。
 func initDefaultVendorMapping(metaMap map[string]*Model, vendorMap map[int]*Vendor, enableAbilities []AbilityWithChannel) {
-	for _, ability := range enableAbilities {
-		modelName := ability.Model
-		if _, exists := metaMap[modelName]; exists {
+	for _, meta := range metaMap {
+		if meta == nil || meta.VendorID != 0 {
 			continue
 		}
 
-		// 匹配供应商
-		vendorID := 0
-		modelLower := strings.ToLower(modelName)
+		modelLower := strings.ToLower(meta.ModelName)
 		for pattern, vendorName := range defaultVendorRules {
 			if strings.Contains(modelLower, pattern) {
-				vendorID = getOrCreateVendor(vendorName, vendorMap)
+				meta.VendorID = getOrCreateVendor(vendorName, vendorMap)
 				break
 			}
-		}
-
-		// 创建模型元数据
-		metaMap[modelName] = &Model{
-			ModelName: modelName,
-			VendorID:  vendorID,
-			Status:    1,
-			NameRule:  NameRuleExact,
 		}
 	}
 }

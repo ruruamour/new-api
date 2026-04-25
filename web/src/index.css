@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
 /* ==================== Tailwind CSS 配置 ==================== */
 @layer tailwind-base, semi, tailwind-components, tailwind-utils;
 
@@ -13,22 +15,107 @@
   @tailwind utilities;
 }
 
-/* ==================== 全局基础样式 ==================== */
+/* ==================== 温暖奶油/米黄高雅主题 (Claude/Cursor 风格) ==================== */
 :root {
-  --sidebar-width: 180px;
-  --sidebar-width-collapsed: 60px;
+  --sidebar-width: 260px;
+  --sidebar-width-collapsed: 72px;
   --sidebar-current-width: var(--sidebar-width);
+}
+
+body {
+  /* 主色调：深松绿 (Deep Pine Green) */
+  --semi-color-primary: #2D6A4F !important;
+  --semi-color-primary-light-default: rgba(45, 106, 79, 0.07) !important;
+  --semi-color-primary-light-hover: rgba(45, 106, 79, 0.14) !important;
+  --semi-color-primary-light-active: rgba(45, 106, 79, 0.22) !important;
+
+  --semi-color-info: #6366f1 !important;
+  --semi-color-warning: #f59e0b !important;
+  --semi-color-success: #10b981 !important;
+
+  /* 极致圆润 —— 青团般润泽的圆角 */
+  --semi-border-radius-extra-small: 8px !important;
+  --semi-border-radius-small: 14px !important;
+  --semi-border-radius-medium: 18px !important;
+  --semi-border-radius-large: 24px !important;
+  --semi-border-radius-circle: 1000px !important;
+  --semi-border-radius-full: 9999px !important;
+
+  /* 极为柔和、略带暖色调的偏散阴影，消除冷硬感 */
+  --semi-shadow-elevated: 0 12px 32px -4px rgba(67, 56, 42, 0.06), 0 4px 12px rgba(67, 56, 42, 0.03) !important;
+
+  /* 圆润温柔的排版 —— 全站统一 Nunito + 思源黑体 */
+  font-family: 'Nunito', 'Noto Sans SC', ui-sans-serif, system-ui, -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei UI', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* 温润的背景色与深原木色文字 (Off-white / Warm Gray) */
+  color: #1c1917 !important;
+  /* Stone 900 更深的文字色，提升可读性 */
+  background-color: #f2ebd9 !important;
+  /* 更深的暖米色 */
+  --semi-color-bg-0: #f2ebd9 !important;
+  --semi-color-bg-1: #fdfbf7 !important;
+  /* 奶白色卡片，与米色背景同色系 */
+  --semi-color-bg-2: #e8ddc8 !important;
+  /* 悬浮时的暖米色 */
+  --semi-color-bg-3: #dfceb3 !important;
+}
+
+/* 优雅的静谧暖系暗色模式 (Warm Dark Mode) */
+body[theme-mode='dark'] {
+  --semi-color-bg-0: #1c1917 !important;
+  /* Stone 900 暖黑 */
+  --semi-color-bg-1: #292524 !important;
+  /* Stone 800 卡片 */
+  --semi-color-bg-2: #44403c !important;
+  /* Stone 700 悬浮 */
+  --semi-color-bg-3: #57534e !important;
+
+  --semi-color-text-0: #fafaf9 !important;
+  /* 面包白文字 */
+
+  /* 暗模式下极其柔和的极细边框 */
+  --semi-color-border: rgba(250, 250, 249, 0.05) !important;
+
+  /* 暗模式下略微提亮陶土橙，保持可读性 */
+  --semi-color-primary: #d4704e !important;
+  --semi-color-primary-light-default: rgba(212, 112, 78, 0.10) !important;
+  --semi-color-primary-light-hover: rgba(212, 112, 78, 0.18) !important;
+  --semi-color-primary-light-active: rgba(212, 112, 78, 0.28) !important;
+
+  /* 暗场下深邃但不起眼的投影 */
+  --semi-shadow-elevated: 0 0 0 1px rgba(250, 250, 249, 0.03), 0 12px 32px -4px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* 回归柔和、自然的交互微动效 */
+.semi-button {
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s cubic-bezier(0.2, 0, 0, 1), background-color 0.2s !important;
+}
+
+.semi-button:hover:not(.semi-button-disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(67, 56, 42, 0.08);
+  /* 悬浮时增加阴影深度 */
+}
+
+body[theme-mode='dark'] .semi-button:hover:not(.semi-button-disabled) {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.semi-button:active:not(.semi-button-disabled) {
+  transform: translateY(0);
 }
 
 body.sidebar-collapsed {
   --sidebar-current-width: var(--sidebar-width-collapsed);
 }
 
-body {
-  font-family: Lato, 'Helvetica Neue', Arial, Helvetica, 'Microsoft YaHei',
-    sans-serif;
-  color: var(--semi-color-text-0);
-  background-color: var(--semi-color-bg-0);
+/* 桌面端禁止 body 纵向滚动 - 防止 VChart tooltip 触发页面滚动条 */
+@media (min-width: 768px) {
+  body {
+    overflow-y: hidden;
+  }
 }
 
 .app-layout {
@@ -68,6 +155,15 @@ code {
   padding: 4px 12px !important;
 }
 
+/* 导航栏和 Logo 用更粗的字重突出 */
+.semi-navigation-item-text,
+.semi-navigation-sub-title,
+.semi-navigation-header-text,
+.header-logo-text {
+  font-weight: 700 !important;
+  letter-spacing: 0.3px !important;
+}
+
 .semi-navigation-sub-title {
   padding: 0 !important;
 }
@@ -95,20 +191,7 @@ code {
   height: 44px !important;
 }
 
-#root
-  > section
-  > header
-  > section
-  > div
-  > div
-  > div
-  > div.semi-navigation-header-list-outer
-  > div.semi-navigation-list-wrapper
-  > ul
-  > div
-  > a
-  > li
-  > span {
+#root>section>header>section>div>div>div>div.semi-navigation-header-list-outer>div.semi-navigation-list-wrapper>ul>div>a>li>span {
   font-weight: 600 !important;
 }
 
@@ -344,6 +427,102 @@ code {
   text-overflow: ellipsis;
 }
 
+/* Badge for count/multiplier in filter buttons */
+.sbg-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 9px;
+  font-size: 11px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  background-color: var(--semi-color-fill-0);
+  color: var(--semi-color-text-2);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.sbg-badge-active {
+  background-color: var(--semi-color-primary-light-active);
+  color: var(--semi-color-primary);
+}
+
+/* ---- SelectableButtonGroup color variants ---- */
+.sbg-variant-violet {
+  --semi-color-primary: #6d28d9;
+  --semi-color-primary-light-default: rgba(124, 58, 237, 0.08);
+  --semi-color-primary-light-hover: rgba(124, 58, 237, 0.15);
+  --semi-color-primary-light-active: rgba(124, 58, 237, 0.22);
+}
+
+.sbg-variant-teal {
+  --semi-color-primary: #0f766e;
+  --semi-color-primary-light-default: rgba(20, 184, 166, 0.08);
+  --semi-color-primary-light-hover: rgba(20, 184, 166, 0.15);
+  --semi-color-primary-light-active: rgba(20, 184, 166, 0.22);
+}
+
+.sbg-variant-amber {
+  --semi-color-primary: #b45309;
+  --semi-color-primary-light-default: rgba(245, 158, 11, 0.08);
+  --semi-color-primary-light-hover: rgba(245, 158, 11, 0.15);
+  --semi-color-primary-light-active: rgba(245, 158, 11, 0.22);
+}
+
+.sbg-variant-rose {
+  --semi-color-primary: #be123c;
+  --semi-color-primary-light-default: rgba(244, 63, 94, 0.08);
+  --semi-color-primary-light-hover: rgba(244, 63, 94, 0.15);
+  --semi-color-primary-light-active: rgba(244, 63, 94, 0.22);
+}
+
+.sbg-variant-green {
+  --semi-color-primary: #047857;
+  --semi-color-primary-light-default: rgba(16, 185, 129, 0.08);
+  --semi-color-primary-light-hover: rgba(16, 185, 129, 0.15);
+  --semi-color-primary-light-active: rgba(16, 185, 129, 0.22);
+}
+
+/* Dark mode: lighter text, slightly stronger backgrounds */
+html.dark .sbg-variant-violet {
+  --semi-color-primary: #a78bfa;
+  --semi-color-primary-light-default: rgba(139, 92, 246, 0.14);
+  --semi-color-primary-light-hover: rgba(139, 92, 246, 0.22);
+  --semi-color-primary-light-active: rgba(139, 92, 246, 0.3);
+}
+
+html.dark .sbg-variant-teal {
+  --semi-color-primary: #2dd4bf;
+  --semi-color-primary-light-default: rgba(45, 212, 191, 0.14);
+  --semi-color-primary-light-hover: rgba(45, 212, 191, 0.22);
+  --semi-color-primary-light-active: rgba(45, 212, 191, 0.3);
+}
+
+html.dark .sbg-variant-amber {
+  --semi-color-primary: #fbbf24;
+  --semi-color-primary-light-default: rgba(251, 191, 36, 0.14);
+  --semi-color-primary-light-hover: rgba(251, 191, 36, 0.22);
+  --semi-color-primary-light-active: rgba(251, 191, 36, 0.3);
+}
+
+html.dark .sbg-variant-rose {
+  --semi-color-primary: #fb7185;
+  --semi-color-primary-light-default: rgba(251, 113, 133, 0.14);
+  --semi-color-primary-light-hover: rgba(251, 113, 133, 0.22);
+  --semi-color-primary-light-active: rgba(251, 113, 133, 0.3);
+}
+
+html.dark .sbg-variant-green {
+  --semi-color-primary: #34d399;
+  --semi-color-primary-light-default: rgba(52, 211, 153, 0.14);
+  --semi-color-primary-light-hover: rgba(52, 211, 153, 0.22);
+  --semi-color-primary-light-active: rgba(52, 211, 153, 0.3);
+}
+
 /* Tabs组件样式 */
 .semi-tabs-content {
   padding: 0 !important;
@@ -356,7 +535,7 @@ code {
   overflow: hidden !important;
 }
 
-.semi-tabs-content .semi-tabs-pane > div {
+.semi-tabs-content .semi-tabs-pane>div {
   height: 100% !important;
 }
 
@@ -372,6 +551,9 @@ code {
 /* 页脚样式 */
 .custom-footer {
   font-size: 1.1em;
+}
+.custom-footer.na-cb6feafeb3990c78 {
+  position: relative;
 }
 
 /* 卡片内容容器通用样式 */
@@ -585,14 +767,12 @@ code {
 }
 
 .shine-text {
-  background: linear-gradient(
-    90deg,
-    currentColor 0%,
-    currentColor 40%,
-    rgba(255, 255, 255, 0.9) 50%,
-    currentColor 60%,
-    currentColor 100%
-  );
+  background: linear-gradient(90deg,
+      currentColor 0%,
+      currentColor 40%,
+      rgba(255, 255, 255, 0.9) 50%,
+      currentColor 60%,
+      currentColor 100%);
   background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -601,14 +781,12 @@ code {
 }
 
 .dark .shine-text {
-  background: linear-gradient(
-    90deg,
-    currentColor 0%,
-    currentColor 40%,
-    #facc15 50%,
-    currentColor 60%,
-    currentColor 100%
-  );
+  background: linear-gradient(90deg,
+      currentColor 0%,
+      currentColor 40%,
+      #facc15 50%,
+      currentColor 60%,
+      currentColor 100%);
   background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -652,8 +830,8 @@ code {
 }
 
 .blur-ball-indigo {
-  background: #6366f1;
-  /* indigo-500 */
+  background: #52B788;
+  /* soft pine green */
   top: 40px;
   left: 50%;
   transform: translateX(-50%);
@@ -661,8 +839,8 @@ code {
 }
 
 .blur-ball-teal {
-  background: #14b8a6;
-  /* teal-400 */
+  background: #2D6A4F;
+  /* deep pine green */
   top: 200px;
   left: 30%;
   opacity: 0.4;
@@ -670,11 +848,97 @@ code {
 
 /* 浅色主题下让模糊球更柔和 */
 html:not(.dark) .blur-ball-indigo {
-  opacity: 0.25;
+  opacity: 0.22;
 }
 
 html:not(.dark) .blur-ball-teal {
-  opacity: 0.2;
+  opacity: 0.18;
+}
+
+/* ==================== 首页昙花纹理背景 ==================== */
+.home-bg-texture {
+  position: relative;
+}
+
+html:not(.dark) .home-bg-texture::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url('/home-flower-bg.png?v=10');
+  background-repeat: no-repeat;
+  background-position: right -40px top -30px;
+  background-size: 850px auto;
+  mix-blend-mode: multiply;
+  opacity: 0.28;
+  -webkit-mask-image: linear-gradient(to bottom left, black 25%, transparent 65%);
+  mask-image: linear-gradient(to bottom left, black 25%, transparent 65%);
+}
+
+/* ==================== 首页 3D Tilt 导航卡片 ==================== */
+.home-tilt-card {
+  position: relative;
+  cursor: pointer;
+  border-radius: 24px;
+  background-color: var(--semi-color-bg-1);
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.15) 100%);
+  border: 1px solid rgba(232, 221, 200, 0.5);
+  box-shadow: 0 2px 12px rgba(139, 115, 85, 0.07), 0 1px 4px rgba(139, 115, 85, 0.05);
+  overflow: hidden;
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+.home-tilt-card:hover {
+  box-shadow: 0 20px 50px rgba(139, 115, 85, 0.14), 0 6px 16px rgba(139, 115, 85, 0.08);
+}
+
+/* CTA 药丸按钮 */
+.home-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 20px;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  color: white;
+  background: linear-gradient(135deg, var(--cta-color), color-mix(in srgb, var(--cta-color) 80%, black));
+  box-shadow: 0 2px 8px rgba(45, 106, 79, 0.2);
+  transition: all 0.25s ease;
+}
+
+.home-card-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(45, 106, 79, 0.3);
+}
+
+.home-card-cta:active {
+  transform: translateY(0);
+}
+
+/* ==================== 加载提示语 ==================== */
+.loading-poetic {
+  font-size: 15px;
+  color: var(--semi-color-text-2);
+  letter-spacing: 4px;
+  animation: loading-breathe 2.5s ease-in-out infinite;
+}
+
+@keyframes loading-breathe {
+
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
 /* ==================== 卡片马卡龙模糊球（类封装） ==================== */
@@ -701,11 +965,9 @@ html:not(.dark) .blur-ball-teal {
   inset: 0;
   pointer-events: none;
   z-index: 0;
-  background: radial-gradient(
-      circle at -5% -10%,
+  background: radial-gradient(circle at -5% -10%,
       var(--pb1) 0%,
-      transparent 60%
-    ),
+      transparent 60%),
     radial-gradient(circle at 105% -10%, var(--pb2) 0%, transparent 55%),
     radial-gradient(circle at 5% 110%, var(--pb3) 0%, transparent 55%),
     radial-gradient(circle at 105% 110%, var(--pb4) 0%, transparent 50%);
@@ -768,6 +1030,24 @@ html.dark .with-pastel-balls::before {
   .table-scroll-card {
     height: calc(100vh - 77px);
     max-height: calc(100vh - 77px);
+  }
+
+  .semi-input-suffix-text {
+    font-size: 11px;
+    padding: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 80px;
+  }
+
+  .semi-input-prefix-text, .semi-input-suffix-text {
+    margin: 0;
+  }
+
+  .semi-select-arrow {
+    margin-left: 2px;
+    margin-right: 2px;
   }
 }
 
@@ -874,4 +1154,31 @@ html.dark .with-pastel-balls::before {
 .semi-button,
 .semi-datepicker-range-input {
   border-radius: 10px !important;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Channel advanced settings side panel animations */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.ec-dbcd0a3c01b55203 {
+  forced-color-adjust: auto;
 }

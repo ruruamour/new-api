@@ -1,0 +1,401 @@
+/*
+Copyright (C) 2025 QuantumNous
+
+Theme: Ocean Blue (海洋蓝)
+Style: 专业、稳重、科技感
+特点: 蓝色渐变、科技感、专业感
+*/
+
+/* ==================== 亮色模式 ==================== */
+:root[data-ui-theme="ocean-blue"],
+[data-ui-theme="ocean-blue"] {
+    /* 主色调 - 海洋蓝 */
+    --theme-primary: #0066CC;
+    --theme-primary-hover: #0052A3;
+    --theme-primary-active: #003D7A;
+    --theme-primary-light: rgba(0, 102, 204, 0.15);
+    --theme-primary-rgb: 0, 102, 204;
+
+    /* 辅助色 */
+    --theme-secondary: #00A3E0;
+    --theme-secondary-hover: #0088CC;
+    --theme-secondary-light: rgba(0, 163, 224, 0.15);
+
+    /* 背景色 */
+    --theme-bg-primary: #FFFFFF;
+    --theme-bg-secondary: #F0F7FF;
+    --theme-bg-tertiary: #E0F2FE;
+    --theme-bg-gradient: linear-gradient(135deg, #0066CC 0%, #00A3E0 100%);
+
+    /* 文字色 */
+    --theme-text-primary: #1E293B;
+    --theme-text-secondary: #64748B;
+    --theme-text-tertiary: #94A3B8;
+
+    /* 边框 */
+    --theme-border: #CBD5E1;
+    --theme-border-light: #E2E8F0;
+
+    /* 状态色 */
+    --theme-success: #10B981;
+    --theme-warning: #F59E0B;
+    --theme-danger: #EF4444;
+    --theme-info: #0EA5E9;
+
+    /* 圆角 */
+    --theme-radius-sm: 6px;
+    --theme-radius-md: 10px;
+    --theme-radius-lg: 14px;
+    --theme-radius-xl: 20px;
+
+    /* 阴影 */
+    --theme-shadow-sm: 0 2px 8px rgba(0, 102, 204, 0.08);
+    --theme-shadow-md: 0 8px 24px rgba(0, 102, 204, 0.12);
+    --theme-shadow-lg: 0 20px 40px rgba(0, 102, 204, 0.15);
+
+    /* 侧边栏 */
+    --sidebar-bg: #FFFFFF;
+    --sidebar-item-hover-bg: rgba(0, 102, 204, 0.08);
+    --sidebar-item-active-bg: #0066CC;
+    --sidebar-item-active-color: #FFFFFF;
+
+    /* 头部 */
+    --header-bg: #FFFFFF;
+    --header-border: #E2E8F0;
+
+    /* 卡片 */
+    --card-bg: #FFFFFF;
+    --card-border: #E2E8F0;
+    --card-shadow: 0 4px 12px rgba(0, 102, 204, 0.08);
+    --card-hover-shadow: 0 16px 32px rgba(0, 102, 204, 0.12);
+
+    /* 按钮 */
+    --btn-primary-bg: linear-gradient(135deg, #0066CC 0%, #00A3E0 100%);
+    --btn-primary-hover-bg: linear-gradient(135deg, #0052A3 0%, #0088CC 100%);
+    --btn-primary-shadow: 0 4px 14px rgba(0, 102, 204, 0.35);
+
+    /* 输入框 */
+    --input-bg: #FFFFFF;
+    --input-border: #CBD5E1;
+    --input-focus-border: #0066CC;
+    --input-focus-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
+}
+
+/* ==================== Semi Design 变量覆盖 ==================== */
+[data-ui-theme="ocean-blue"] {
+    /* 主色 */
+    --semi-color-primary: #0066CC;
+    --semi-color-primary-hover: #0052A3;
+    --semi-color-primary-active: #003D7A;
+    --semi-color-primary-light-default: rgba(0, 102, 204, 0.08);
+    --semi-color-primary-light-hover: rgba(0, 102, 204, 0.15);
+    --semi-color-primary-light-active: rgba(0, 102, 204, 0.22);
+
+    /* 背景色 */
+    --semi-color-bg-0: #FFFFFF;
+    --semi-color-bg-1: #F0F7FF;
+    --semi-color-bg-2: #E0F2FE;
+    --semi-color-bg-3: #CBD5E1;
+
+    /* 文字色 */
+    --semi-color-text-0: #1E293B;
+    --semi-color-text-1: #334155;
+    --semi-color-text-2: #64748B;
+    --semi-color-text-3: #94A3B8;
+
+    /* 边框色 */
+    --semi-color-border: #CBD5E1;
+    --semi-color-border-hover: #94A3B8;
+
+    /* 填充色 */
+    --semi-color-fill-0: #F0F7FF;
+    --semi-color-fill-1: #E0F2FE;
+    --semi-color-fill-2: #CBD5E1;
+}
+
+/* ==================== 暗色模式 ==================== */
+:root[data-ui-theme="ocean-blue"][theme-mode="dark"],
+[data-ui-theme="ocean-blue"][theme-mode="dark"] {
+    --theme-primary: #3B82F6;
+    --theme-primary-hover: #60A5FA;
+    --theme-primary-active: #2563EB;
+    --theme-primary-light: rgba(59, 130, 246, 0.15);
+    --theme-primary-rgb: 59, 130, 246;
+
+    --theme-secondary: #0EA5E9;
+    --theme-secondary-hover: #22D3EE;
+    --theme-secondary-light: rgba(14, 165, 233, 0.15);
+
+    --theme-bg-primary: #0F172A;
+    --theme-bg-secondary: #1E293B;
+    --theme-bg-tertiary: #334155;
+    --theme-bg-gradient: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+
+    --theme-text-primary: #F1F5F9;
+    --theme-text-secondary: #94A3B8;
+    --theme-text-tertiary: #64748B;
+
+    --theme-border: #475569;
+    --theme-border-light: #334155;
+
+    --theme-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --theme-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+    --theme-shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.5);
+
+    --sidebar-bg: #1E293B;
+    --sidebar-item-hover-bg: rgba(59, 130, 246, 0.15);
+    --sidebar-item-active-bg: #3B82F6;
+
+    --header-bg: #1E293B;
+    --header-border: #475569;
+
+    --card-bg: #1E293B;
+    --card-border: #475569;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --card-hover-shadow: 0 16px 32px rgba(59, 130, 246, 0.15);
+
+    --input-bg: #334155;
+    --input-border: #475569;
+    --input-focus-border: #3B82F6;
+    --input-focus-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+/* ==================== Semi Design 暗色变量 ==================== */
+[data-ui-theme="ocean-blue"][theme-mode="dark"] {
+    --semi-color-primary: #3B82F6;
+    --semi-color-primary-hover: #60A5FA;
+    --semi-color-primary-active: #2563EB;
+    --semi-color-primary-light-default: rgba(59, 130, 246, 0.15);
+    --semi-color-primary-light-hover: rgba(59, 130, 246, 0.22);
+    --semi-color-primary-light-active: rgba(59, 130, 246, 0.3);
+
+    --semi-color-bg-0: #0F172A;
+    --semi-color-bg-1: #1E293B;
+    --semi-color-bg-2: #334155;
+    --semi-color-bg-3: #475569;
+
+    --semi-color-text-0: #F1F5F9;
+    --semi-color-text-1: #E2E8F0;
+    --semi-color-text-2: #94A3B8;
+    --semi-color-text-3: #64748B;
+
+    --semi-color-border: #475569;
+    --semi-color-border-hover: #64748B;
+
+    --semi-color-fill-0: rgba(255, 255, 255, 0.05);
+    --semi-color-fill-1: rgba(255, 255, 255, 0.08);
+    --semi-color-fill-2: rgba(255, 255, 255, 0.12);
+}
+
+/* ==================== 全局背景 ==================== */
+[data-ui-theme="ocean-blue"] body {
+    background: var(--theme-bg-gradient);
+    min-height: 100vh;
+    transition: background 0.5s ease;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* ==================== 背景装饰 ==================== */
+[data-ui-theme="ocean-blue"] body::before {
+    content: '';
+    position: fixed;
+    top: -20%;
+    right: -10%;
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, rgba(0, 163, 224, 0.2) 0%, transparent 70%);
+    animation: ocean-wave 15s infinite alternate ease-in-out;
+    z-index: -1;
+}
+
+[data-ui-theme="ocean-blue"] body::after {
+    content: '';
+    position: fixed;
+    bottom: -10%;
+    left: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, rgba(0, 102, 204, 0.15) 0%, transparent 70%);
+    animation: ocean-wave 20s infinite alternate-reverse ease-in-out;
+    z-index: -1;
+}
+
+/* ==================== 暗色背景装饰 ==================== */
+[data-ui-theme="ocean-blue"][theme-mode="dark"] body::before {
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+}
+
+[data-ui-theme="ocean-blue"][theme-mode="dark"] body::after {
+    background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
+}
+
+/* ==================== 动画 ==================== */
+@keyframes ocean-wave {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.3;
+    }
+
+    50% {
+        transform: translate(20px, 20px) scale(1.1);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translate(-10px, -10px) scale(0.9);
+        opacity: 0.4;
+    }
+}
+
+/* ==================== 全局样式 ==================== */
+[data-ui-theme="ocean-blue"] {
+
+    /* 卡片样式 */
+    .semi-card,
+    .semi-card-outlined {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        box-shadow: var(--card-shadow);
+        transition: all 0.3s ease;
+    }
+
+    .semi-card:hover {
+        box-shadow: var(--card-hover-shadow);
+        border-color: var(--theme-primary);
+    }
+
+    /* 按钮样式 */
+    .semi-button-primary {
+        background: var(--btn-primary-bg);
+        border: none;
+        box-shadow: var(--btn-primary-shadow);
+        transition: all 0.3s ease;
+    }
+
+    .semi-button-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 102, 204, 0.45);
+    }
+
+    /* 输入框样式 */
+    .semi-input,
+    .semi-textarea {
+        background: var(--input-bg);
+        border: 1px solid var(--input-border);
+        transition: all 0.3s ease;
+    }
+
+    .semi-input:focus,
+    .semi-textarea:focus {
+        border-color: var(--input-focus-border);
+        box-shadow: var(--input-focus-shadow);
+    }
+
+    /* 侧边栏样式 */
+    .semi-navigation-vertical .semi-navigation-item-selected {
+        background: var(--sidebar-item-active-bg);
+        color: var(--sidebar-item-active-color);
+    }
+
+    .semi-navigation-vertical .semi-navigation-item:hover {
+        background: var(--sidebar-item-hover-bg);
+    }
+
+    /* 头部样式 */
+    .semi-layout-header {
+        background: var(--header-bg);
+        border-bottom: 1px solid var(--header-border);
+    }
+
+    /* 标签样式 */
+    .semi-tag {
+        background: var(--theme-primary-light);
+        border: 1px solid var(--theme-primary);
+        color: var(--theme-primary);
+    }
+
+    /* 表格样式 */
+    .semi-table-thead .semi-table-th {
+        background: var(--theme-bg-secondary);
+        border-bottom: 1px solid var(--theme-border);
+    }
+
+    .semi-table-tbody .semi-table-tr:hover .semi-table-td {
+        background: var(--theme-primary-light);
+    }
+}
+
+/* ==================== 暗色全局样式 ==================== */
+[data-ui-theme="ocean-blue"][theme-mode="dark"] {
+
+    /* 卡片样式 */
+    .semi-card,
+    .semi-card-outlined {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        box-shadow: var(--card-shadow);
+    }
+
+    /* 按钮样式 */
+    .semi-button-primary {
+        background: var(--btn-primary-bg);
+        box-shadow: var(--btn-primary-shadow);
+    }
+
+    /* 输入框样式 */
+    .semi-input,
+    .semi-textarea {
+        background: var(--input-bg);
+        border: 1px solid var(--input-border);
+    }
+
+    /* 侧边栏样式 */
+    .semi-navigation-vertical .semi-navigation-item-selected {
+        background: var(--sidebar-item-active-bg);
+        color: var(--sidebar-item-active-color);
+    }
+
+    /* 头部样式 */
+    .semi-layout-header {
+        background: var(--header-bg);
+        border-bottom: 1px solid var(--header-border);
+    }
+}
+
+/* ==================== 动画 ==================== */
+@keyframes ocean-blue-fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes ocean-blue-slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes ocean-blue-scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

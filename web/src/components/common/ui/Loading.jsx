@@ -22,8 +22,9 @@ import { Spin } from '@douyinfe/semi-ui';
 
 const Loading = ({ size = 'small' }) => {
   return (
-    <div className='fixed inset-0 w-screen h-screen flex items-center justify-center'>
+    <div className='fixed inset-0 w-screen h-screen flex flex-col items-center justify-center gap-6'>
       <Spin size={size} spinning={true} />
+      <p className='loading-poetic'>念已起，花将开……</p>
     </div>
   );
 };

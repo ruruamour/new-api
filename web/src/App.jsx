@@ -55,6 +55,7 @@ const Dashboard = lazy(() => import('./pages/Dashboard'));
 const About = lazy(() => import('./pages/About'));
 const UserAgreement = lazy(() => import('./pages/UserAgreement'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const ThemePreview = lazy(() => import('./pages/ThemePreview'));
 
 function DynamicOAuth2Callback() {
   const { provider } = useParams();
@@ -103,6 +104,14 @@ function App() {
           element={
             <Suspense fallback={<Loading></Loading>} key={location.pathname}>
               <Setup />
+            </Suspense>
+          }
+        />
+        <Route
+          path='/theme-preview'
+          element={
+            <Suspense fallback={<Loading></Loading>} key={location.pathname}>
+              <ThemePreview />
             </Suspense>
           }
         />

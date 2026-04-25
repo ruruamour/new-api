@@ -20,14 +20,7 @@ func IsChannelEnabledForGroupModel(group string, modelName string, channelID int
 		return false
 	}
 
-	if isChannelIDInList(group2model2channels[group][modelName], channelID) {
-		return true
-	}
-	normalized := ratio_setting.FormatMatchingModelName(modelName)
-	if normalized != "" && normalized != modelName {
-		return isChannelIDInList(group2model2channels[group][normalized], channelID)
-	}
-	return false
+	return isChannelIDInList(getMatchingChannelIDs(group, modelName), channelID)
 }
 
 func IsChannelEnabledForAnyGroupModel(groups []string, modelName string, channelID int) bool {
@@ -44,19 +37,12 @@ func IsChannelEnabledForAnyGroupModel(groups []string, modelName string, channel
 
 func isChannelEnabledForGroupModelDB(group string, modelName string, channelID int) bool {
 	var count int64
-	err := DB.Model(&Ability{}).
-		Where(commonGroupCol+" = ? and model = ? and channel_id = ? and enabled = ?", group, modelName, channelID, true).
-		Count(&count).Error
-	if err == nil && count > 0 {
-		return true
-	}
-	normalized := ratio_setting.FormatMatchingModelName(modelName)
-	if normalized == "" || normalized == modelName {
+	matchingModels := ratio_setting.GetMatchingModelNames(modelName)
+	if len(matchingModels) == 0 {
 		return false
 	}
-	count = 0
-	err = DB.Model(&Ability{}).
-		Where(commonGroupCol+" = ? and model = ? and channel_id = ? and enabled = ?", group, normalized, channelID, true).
+	err := DB.Model(&Ability{}).
+		Where(commonGroupCol+" = ? and model IN ? and channel_id = ? and enabled = ?", group, matchingModels, channelID, true).
 		Count(&count).Error
 	return err == nil && count > 0
 }

@@ -21,7 +21,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import {
   Avatar,
   Typography,
-  Tag,
   Card,
   Button,
   Banner,
@@ -32,6 +31,7 @@ import {
   Col,
   Spin,
   Tooltip,
+  Tag,
   Tabs,
   TabPane,
 } from '@douyinfe/semi-ui';
@@ -87,6 +87,8 @@ const RechargeCard = ({
   statusLoading,
   topupInfo,
   onOpenHistory,
+  enableWaffoTopUp,
+  enableWaffoPancakeTopUp,
   subscriptionLoading = false,
   subscriptionPlans = [],
   billingPreference,
@@ -102,6 +104,7 @@ const RechargeCard = ({
   const [activeTab, setActiveTab] = useState('topup');
   const shouldShowSubscription =
     !subscriptionLoading && subscriptionPlans.length > 0;
+  const regularPayMethods = payMethods || [];
 
   useEffect(() => {
     if (initialTabSetRef.current) return;
@@ -124,11 +127,17 @@ const RechargeCard = ({
           <div
             className='relative h-30'
             style={{
-              '--palette-primary-darkerChannel': '37 99 235',
-              backgroundImage: `linear-gradient(0deg, rgba(var(--palette-primary-darkerChannel) / 80%), rgba(var(--palette-primary-darkerChannel) / 80%)), url('/cover-4.webp')`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
+              backgroundImage: `
+                url('/flower-pattern-dense.png'),
+                radial-gradient(ellipse at 20% 50%, #5BB685 0%, transparent 70%),
+                radial-gradient(ellipse at 80% 20%, #4A9B6F 0%, transparent 60%),
+                radial-gradient(ellipse at 60% 80%, #3D8A5E 0%, transparent 65%),
+                linear-gradient(135deg, #3A8F62, #2E7250)
+              `,
+              backgroundBlendMode: 'soft-light, normal, normal, normal, normal',
+              backgroundRepeat: 'repeat, no-repeat, no-repeat, no-repeat, no-repeat',
+              backgroundSize: '500px, cover, cover, cover, cover',
+              backgroundPosition: 'center, center, center, center, center',
             }}
           >
             <div className='relative z-10 h-full flex flex-col justify-between p-4'>
@@ -224,19 +233,31 @@ const RechargeCard = ({
           <div className='py-8 flex justify-center'>
             <Spin size='large' />
           </div>
-        ) : enableOnlineTopUp || enableStripeTopUp || enableCreemTopUp ? (
+        ) : enableOnlineTopUp ||
+          enableStripeTopUp ||
+          enableCreemTopUp ||
+          enableWaffoTopUp ||
+          enableWaffoPancakeTopUp ? (
           <Form
             getFormApi={(api) => (onlineFormApiRef.current = api)}
             initValues={{ topUpCount: topUpCount }}
           >
             <div className='space-y-6'>
-              {(enableOnlineTopUp || enableStripeTopUp) && (
+              {(enableOnlineTopUp ||
+                enableStripeTopUp ||
+                enableWaffoTopUp ||
+                enableWaffoPancakeTopUp) && (
                 <Row gutter={12}>
                   <Col xs={24} sm={24} md={24} lg={10} xl={10}>
                     <Form.InputNumber
                       field='topUpCount'
                       label={t('充值数量')}
-                      disabled={!enableOnlineTopUp && !enableStripeTopUp}
+                      disabled={
+                        !enableOnlineTopUp &&
+                        !enableStripeTopUp &&
+                        !enableWaffoTopUp &&
+                        !enableWaffoPancakeTopUp
+                      }
                       placeholder={
                         t('充值数量，最低 ') + renderQuotaWithAmount(minTopUp)
                       }
@@ -288,16 +309,27 @@ const RechargeCard = ({
                       style={{ width: '100%' }}
                     />
                   </Col>
-                  <Col xs={24} sm={24} md={24} lg={14} xl={14}>
-                    <Form.Slot label={t('选择支付方式')}>
-                      {payMethods && payMethods.length > 0 ? (
+                  {regularPayMethods.length > 0 && (
+                    <Col xs={24} sm={24} md={24} lg={14} xl={14}>
+                      <Form.Slot label={t('选择支付方式')}>
                         <Space wrap>
-                          {payMethods.map((payMethod) => {
-                            const minTopupVal = Number(payMethod.min_topup) || 0;
+                          {regularPayMethods.map((payMethod) => {
+                            const minTopupVal =
+                              Number(payMethod.min_topup) || 0;
                             const isStripe = payMethod.type === 'stripe';
+                            const isWaffo =
+                              typeof payMethod.type === 'string' &&
+                              payMethod.type.startsWith('waffo:');
+                            const isWaffoPancake =
+                              payMethod.type === 'waffo_pancake';
                             const disabled =
-                              (!enableOnlineTopUp && !isStripe) ||
+                              (!enableOnlineTopUp &&
+                                !isStripe &&
+                                !isWaffo &&
+                                !isWaffoPancake) ||
                               (!enableStripeTopUp && isStripe) ||
+                              (!enableWaffoTopUp && isWaffo) ||
+                              (!enableWaffoPancakeTopUp && isWaffoPancake) ||
                               minTopupVal > Number(topUpCount || 0);
 
                             const buttonEl = (
@@ -317,6 +349,21 @@ const RechargeCard = ({
                                     <SiWechat size={18} color='#07C160' />
                                   ) : payMethod.type === 'stripe' ? (
                                     <SiStripe size={18} color='#635BFF' />
+                                  ) : payMethod.icon ? (
+                                    <img
+                                      src={payMethod.icon}
+                                      alt={payMethod.name}
+                                      style={{
+                                        width: 18,
+                                        height: 18,
+                                        objectFit: 'contain',
+                                      }}
+                                    />
+                                  ) : payMethod.type === 'waffo_pancake' ? (
+                                    <CreditCard
+                                      size={18}
+                                      color='var(--semi-color-primary)'
+                                    />
                                   ) : (
                                     <CreditCard
                                       size={18}
@@ -352,17 +399,13 @@ const RechargeCard = ({
                             );
                           })}
                         </Space>
-                      ) : (
-                        <div className='text-gray-500 text-sm p-3 bg-gray-50 rounded-lg border border-dashed border-gray-300'>
-                          {t('暂无可用的支付方式，请联系管理员配置')}
-                        </div>
-                      )}
-                    </Form.Slot>
-                  </Col>
+                      </Form.Slot>
+                    </Col>
+                  )}
                 </Row>
               )}
 
-              {(enableOnlineTopUp || enableStripeTopUp) && (
+              {(enableOnlineTopUp || enableStripeTopUp || enableWaffoTopUp) && (
                 <Form.Slot
                   label={
                     <div className='flex items-center gap-2'>
@@ -389,7 +432,9 @@ const RechargeCard = ({
                   <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2'>
                     {presetAmounts.map((preset, index) => {
                       const discount =
-                        preset.discount || topupInfo?.discount?.[preset.value] || 1.0;
+                        preset.discount ||
+                        topupInfo?.discount?.[preset.value] ||
+                        1.0;
                       const originalPrice = preset.value * priceRatio;
                       const discountedPrice = originalPrice * discount;
                       const hasDiscount = discount < 1.0;
@@ -405,7 +450,7 @@ const RechargeCard = ({
                           const s = JSON.parse(statusStr);
                           usdRate = s?.usd_exchange_rate || 7;
                         }
-                      } catch (e) { }
+                      } catch (e) {}
 
                       let displayValue = preset.value; // 显示的数量
                       let displayActualPay = actualPay;
@@ -456,7 +501,10 @@ const RechargeCard = ({
                               {hasDiscount && (
                                 <Tag style={{ marginLeft: 4 }} color='green'>
                                   {t('折').includes('off')
-                                    ? ((1 - parseFloat(discount)) * 100).toFixed(1)
+                                    ? (
+                                        (1 - parseFloat(discount)) *
+                                        100
+                                      ).toFixed(1)
                                     : (discount * 10).toFixed(1)}
                                   {t('折')}
                                 </Tag>

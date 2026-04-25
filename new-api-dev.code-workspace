@@ -1,0 +1,30 @@
+{
+  "folders": [
+    { "name": "new-api-dev", "path": "." },
+    { "name": "nuoapi-ops", "path": "../projects/nuoapi-ops" }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/__pycache__": true,
+      "**/.next": true,
+      "**/dist": false,
+      "**/.cache": true,
+      "**/.gocache": true,
+      "**/.gomodcache": true,
+      "logs": true,
+      "data": true
+    },
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/dist": true,
+      "**/.next": true,
+      "**/.cache": true,
+      "**/.gocache": true,
+      "**/.gomodcache": true,
+      "logs": true,
+      "data": true,
+      "playbooks/change-snapshots": true
+    }
+  }
+}
