@@ -119,6 +119,7 @@ const PricingVendors = ({
       onChange={setFilterVendor}
       loading={loading}
       variant='violet'
+      forceShowTags
       t={t}
     />
   );

@@ -48,7 +48,7 @@ export function isRoot() {
 
 export function getSystemName() {
   let system_name = localStorage.getItem('system_name');
-  if (!system_name) return 'New API';
+  if (!system_name) return '糯叽叽 API';
   return system_name;
 }
 
@@ -657,6 +657,8 @@ export const calculateModelPrice = ({
       value !== null &&
       value !== '' &&
       Number.isFinite(Number(value));
+    const hasSupplementalRatioValue = (value) =>
+      hasRatioValue(value) && Number(value) !== 0;
 
     const formatRatio = (value) =>
       hasRatioValue(value) ? Number(Number(value).toFixed(6)) : null;
@@ -664,12 +666,24 @@ export const calculateModelPrice = ({
     if (isTokensDisplay) {
       return {
         inputRatio: formatRatio(record.model_ratio),
-        completionRatio: formatRatio(record.completion_ratio),
-        cacheRatio: formatRatio(record.cache_ratio),
-        createCacheRatio: formatRatio(record.create_cache_ratio),
-        imageRatio: formatRatio(record.image_ratio),
-        audioInputRatio: formatRatio(record.audio_ratio),
-        audioOutputRatio: formatRatio(record.audio_completion_ratio),
+        completionRatio: hasSupplementalRatioValue(record.completion_ratio)
+          ? formatRatio(record.completion_ratio)
+          : null,
+        cacheRatio: hasSupplementalRatioValue(record.cache_ratio)
+          ? formatRatio(record.cache_ratio)
+          : null,
+        createCacheRatio: hasSupplementalRatioValue(record.create_cache_ratio)
+          ? formatRatio(record.create_cache_ratio)
+          : null,
+        imageRatio: hasSupplementalRatioValue(record.image_ratio)
+          ? formatRatio(record.image_ratio)
+          : null,
+        audioInputRatio: hasSupplementalRatioValue(record.audio_ratio)
+          ? formatRatio(record.audio_ratio)
+          : null,
+        audioOutputRatio: hasSupplementalRatioValue(record.audio_completion_ratio)
+          ? formatRatio(record.audio_completion_ratio)
+          : null,
         isPerToken: true,
         isTokensDisplay: true,
         usedGroup,
@@ -708,21 +722,21 @@ export const calculateModelPrice = ({
 
     return {
       inputPrice,
-      completionPrice: formatTokenPrice(
-        inputRatioPriceUSD * Number(record.completion_ratio),
-      ),
-      cachePrice: hasRatioValue(record.cache_ratio)
+      completionPrice: hasSupplementalRatioValue(record.completion_ratio)
+        ? formatTokenPrice(inputRatioPriceUSD * Number(record.completion_ratio))
+        : null,
+      cachePrice: hasSupplementalRatioValue(record.cache_ratio)
         ? formatTokenPrice(inputRatioPriceUSD * Number(record.cache_ratio))
         : null,
-      createCachePrice: hasRatioValue(record.create_cache_ratio)
+      createCachePrice: hasSupplementalRatioValue(record.create_cache_ratio)
         ? formatTokenPrice(inputRatioPriceUSD * Number(record.create_cache_ratio))
         : null,
-      imagePrice: hasRatioValue(record.image_ratio)
+      imagePrice: hasSupplementalRatioValue(record.image_ratio)
         ? formatTokenPrice(inputRatioPriceUSD * Number(record.image_ratio))
         : null,
       audioInputPrice,
       audioOutputPrice:
-        audioInputPrice && hasRatioValue(record.audio_completion_ratio)
+        audioInputPrice && hasSupplementalRatioValue(record.audio_completion_ratio)
           ? formatTokenPrice(
               inputRatioPriceUSD *
                 Number(record.audio_ratio) *

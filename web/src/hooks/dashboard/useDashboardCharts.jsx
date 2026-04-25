@@ -103,6 +103,7 @@ export const useDashboardCharts = (
     color: {
       specified: modelColorMap,
     },
+    background: 'transparent',
   });
 
   const [spec_line, setSpecLine] = useState({
@@ -177,6 +178,7 @@ export const useDashboardCharts = (
     color: {
       specified: modelColorMap,
     },
+    background: 'transparent',
   });
 
   // 模型消耗趋势折线图
@@ -213,6 +215,7 @@ export const useDashboardCharts = (
     color: {
       specified: modelColorMap,
     },
+    background: 'transparent',
   });
 
   // 模型调用次数排行柱状图
@@ -257,6 +260,7 @@ export const useDashboardCharts = (
     color: {
       specified: modelColorMap,
     },
+    background: 'transparent',
   });
 
   // ========== 数据处理函数 ==========

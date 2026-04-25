@@ -59,6 +59,7 @@ const SelectableButtonGroup = ({
   withCheckbox = false,
   loading = false,
   variant,
+  forceShowTags = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [skeletonCount] = useState(12);
@@ -91,11 +92,12 @@ const SelectableButtonGroup = ({
   const getResponsiveConfig = () => {
     if (containerWidth <= 280) return { columns: 1, showTags: true }; // 极窄：1列+标签
     if (containerWidth <= 380) return { columns: 2, showTags: true }; // 窄屏：2列+标签
-    if (containerWidth <= 460) return { columns: 3, showTags: false }; // 中等：3列不加标签
+    if (containerWidth <= 460) return { columns: 3, showTags: false }; // 中等：3列默认隐藏标签
     return { columns: 3, showTags: true }; // 最宽：3列+标签
   };
 
-  const { columns: perRow, showTags: shouldShowTags } = getResponsiveConfig();
+  const { columns: perRow, showTags } = getResponsiveConfig();
+  const shouldShowTags = forceShowTags || showTags;
   const maxVisibleRows = Math.max(1, Math.floor(collapseHeight / 32)); // Approx row height 32
   const needCollapse = collapsible && items.length > perRow * maxVisibleRows;
   const showSkeleton = useMinimumLoadingTime(loading);

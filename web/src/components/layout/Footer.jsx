@@ -20,6 +20,7 @@ For commercial licensing, please contact support@quantumnous.com
 import React, { useEffect, useState, useMemo, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Typography } from '@douyinfe/semi-ui';
+import { IconGithubLogo } from '@douyinfe/semi-icons';
 import { getFooterHTML, getLogo, getSystemName } from '../../helpers';
 import { StatusContext } from '../../context/Status';
 
@@ -196,16 +197,13 @@ const FooterBar = () => {
           </div>
 
           <div className='text-sm'>
-            <span className='!text-semi-color-text-1'>
-              {t('设计与开发由')}{' '}
-            </span>
             <a
               href='https://github.com/QuantumNous/new-api'
               target='_blank'
               rel='noopener noreferrer'
-              className='!text-semi-color-primary font-medium'
+              className='!text-semi-color-text-1 hover:!text-semi-color-primary transition-colors'
             >
-              New API
+              <IconGithubLogo size='small' />
             </a>
           </div>
         </div>
