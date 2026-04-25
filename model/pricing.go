@@ -10,6 +10,7 @@ import (
 
 	"github.com/QuantumNous/new-api/common"
 	"github.com/QuantumNous/new-api/constant"
+	"github.com/QuantumNous/new-api/setting/billing_setting"
 	"github.com/QuantumNous/new-api/setting/ratio_setting"
 	"github.com/QuantumNous/new-api/types"
 )
@@ -25,8 +26,15 @@ type Pricing struct {
 	ModelPrice             float64                 `json:"model_price"`
 	OwnerBy                string                  `json:"owner_by"`
 	CompletionRatio        float64                 `json:"completion_ratio"`
+	CacheRatio             *float64                `json:"cache_ratio,omitempty"`
+	CreateCacheRatio       *float64                `json:"create_cache_ratio,omitempty"`
+	ImageRatio             *float64                `json:"image_ratio,omitempty"`
+	AudioRatio             *float64                `json:"audio_ratio,omitempty"`
+	AudioCompletionRatio   *float64                `json:"audio_completion_ratio,omitempty"`
 	EnableGroup            []string                `json:"enable_groups"`
 	SupportedEndpointTypes []constant.EndpointType `json:"supported_endpoint_types"`
+	BillingMode            string                  `json:"billing_mode,omitempty"`
+	BillingExpr            string                  `json:"billing_expr,omitempty"`
 	PricingVersion         string                  `json:"pricing_version,omitempty"`
 }
 
@@ -67,6 +75,15 @@ func GetPricing() []Pricing {
 		}
 	}
 	return pricingMap
+}
+
+func InvalidatePricingCache() {
+	updatePricingLock.Lock()
+	defer updatePricingLock.Unlock()
+
+	pricingMap = nil
+	vendorsList = nil
+	lastGetPricingTime = time.Time{}
 }
 
 // GetVendors 返回当前定价接口使用到的供应商信息
@@ -276,9 +293,15 @@ func updatePricing() {
 			SupportedEndpointTypes: modelSupportEndpointTypes[model],
 		}
 
+		billingMode := billing_setting.GetBillingMode(model)
+		billingExpr, hasBillingExpr := billing_setting.GetBillingExpr(model)
+		hasTieredMode := billingMode == "tiered_expr"
+		hasValidTieredExpr := hasTieredMode && hasBillingExpr && strings.TrimSpace(billingExpr) != ""
+
 		// 补充模型元数据（描述、标签、供应商、状态）
-		if meta, ok := metaMap[model]; ok {
-			// 若模型被禁用(status!=1)，则直接跳过，不返回给前端
+		// 若 models 表中无记录，普通模型按白名单模式跳过；tiered 模型保留在 pricing 中供前端展示校验状态。
+		meta, ok := metaMap[model]
+		if ok {
 			if meta.Status != 1 {
 				continue
 			}
@@ -286,6 +309,8 @@ func updatePricing() {
 			pricing.Icon = meta.Icon
 			pricing.Tags = meta.Tags
 			pricing.VendorID = meta.VendorID
+		} else if !hasTieredMode {
+			continue
 		}
 		modelPrice, findPrice := ratio_setting.GetModelPrice(model, false)
 		if findPrice {
@@ -297,12 +322,33 @@ func updatePricing() {
 			pricing.CompletionRatio = ratio_setting.GetCompletionRatio(model)
 			pricing.QuotaType = 0
 		}
+		if cacheRatio, ok := ratio_setting.GetCacheRatio(model); ok {
+			pricing.CacheRatio = &cacheRatio
+		}
+		if createCacheRatio, ok := ratio_setting.GetCreateCacheRatio(model); ok {
+			pricing.CreateCacheRatio = &createCacheRatio
+		}
+		if imageRatio, ok := ratio_setting.GetImageRatio(model); ok {
+			pricing.ImageRatio = &imageRatio
+		}
+		if ratio_setting.ContainsAudioRatio(model) {
+			audioRatio := ratio_setting.GetAudioRatio(model)
+			pricing.AudioRatio = &audioRatio
+		}
+		if ratio_setting.ContainsAudioCompletionRatio(model) {
+			audioCompletionRatio := ratio_setting.GetAudioCompletionRatio(model)
+			pricing.AudioCompletionRatio = &audioCompletionRatio
+		}
+		if hasValidTieredExpr {
+			pricing.BillingMode = billingMode
+			pricing.BillingExpr = billingExpr
+		}
 		pricingMap = append(pricingMap, pricing)
 	}
 
 	// 防止大更新后数据不通用
 	if len(pricingMap) > 0 {
-		pricingMap[0].PricingVersion = "82c4a357505fff6fee8462c3f7ec8a645bb95532669cb73b2cabee6a416ec24f"
+		pricingMap[0].PricingVersion = "5a90f2b86c08bd983a9a2e6d66c255f4eaef9c4bc934386d2b6ae84ef0ff1f1f"
 	}
 
 	// 刷新缓存映射，供高并发快速查询

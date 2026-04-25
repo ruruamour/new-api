@@ -1,0 +1,413 @@
+/*
+Copyright (C) 2025 QuantumNous
+
+Theme: Neumorphism (新拟态)
+Style: 柔和、立体、触感
+特点: 阴影内嵌、柔和感、立体感
+*/
+
+/* ==================== 亮色模式 ==================== */
+:root[data-ui-theme="neumorphism"],
+[data-ui-theme="neumorphism"] {
+    /* 主色调 - 靛蓝 */
+    --theme-primary: #64748B;
+    --theme-primary-hover: #475569;
+    --theme-primary-active: #334155;
+    --theme-primary-light: rgba(100, 116, 139, 0.15);
+    --theme-primary-rgb: 100, 116, 139;
+
+    /* 辅助色 */
+    --theme-secondary: #94A3B8;
+    --theme-secondary-hover: #64748B;
+    --theme-secondary-light: rgba(148, 163, 184, 0.15);
+
+    /* 背景色 */
+    --theme-bg-primary: #E2E8F0;
+    --theme-bg-secondary: #CBD5E1;
+    --theme-bg-tertiary: #94A3B8;
+    --theme-bg-gradient: linear-gradient(135deg, #E2E8F0 0%, #CBD5E1 100%);
+
+    /* 文字色 */
+    --theme-text-primary: #475569;
+    --theme-text-secondary: #64748B;
+    --theme-text-tertiary: #94A3B8;
+
+    /* 边框 */
+    --theme-border: transparent;
+    --theme-border-light: transparent;
+
+    /* 状态色 */
+    --theme-success: #10B981;
+    --theme-warning: #F59E0B;
+    --theme-danger: #EF4444;
+    --theme-info: #3B82F6;
+
+    /* 圆角 */
+    --theme-radius-sm: 12px;
+    --theme-radius-md: 16px;
+    --theme-radius-lg: 20px;
+    --theme-radius-xl: 28px;
+
+    /* 阴影 */
+    --theme-shadow-sm: 4px 4px 8px #bebebe, -4px -4px 8px #ffffff;
+    --theme-shadow-md: 6px 6px 12px #bebebe, -6px -6px 12px #ffffff;
+    --theme-shadow-lg: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
+
+    /* 内嵌阴影 */
+    --shadow-inset-sm: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #ffffff;
+    --shadow-inset-md: inset 6px 6px 12px #bebebe, inset -6px -6px 12px #ffffff;
+    --shadow-inset-lg: inset 8px 8px 16px #bebebe, inset -8px -8px 16px #ffffff;
+
+    /* 侧边栏 */
+    --sidebar-bg: #E2E8F0;
+    --sidebar-item-hover-bg: #CBD5E1;
+    --sidebar-item-active-bg: #64748B;
+    --sidebar-item-active-color: #FFFFFF;
+
+    /* 头部 */
+    --header-bg: #E2E8F0;
+    --header-border: transparent;
+
+    /* 卡片 */
+    --card-bg: #E2E8F0;
+    --card-border: transparent;
+    --card-shadow: 6px 6px 12px #bebebe, -6px -6px 12px #ffffff;
+    --card-hover-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
+
+    /* 按钮 */
+    --btn-primary-bg: #64748B;
+    --btn-primary-hover-bg: #475569;
+    --btn-primary-shadow: 4px 4px 8px #bebebe, -4px -4px 8px #ffffff;
+
+    /* 输入框 */
+    --input-bg: #E2E8F0;
+    --input-border: transparent;
+    --input-focus-border: #64748B;
+    --input-focus-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #ffffff;
+}
+
+/* ==================== Semi Design 变量覆盖 ==================== */
+[data-ui-theme="neumorphism"] {
+    /* 主色 */
+    --semi-color-primary: #64748B;
+    --semi-color-primary-hover: #475569;
+    --semi-color-primary-active: #334155;
+    --semi-color-primary-light-default: rgba(100, 116, 139, 0.08);
+    --semi-color-primary-light-hover: rgba(100, 116, 139, 0.15);
+    --semi-color-primary-light-active: rgba(100, 116, 139, 0.22);
+
+    /* 背景色 */
+    --semi-color-bg-0: #E2E8F0;
+    --semi-color-bg-1: #CBD5E1;
+    --semi-color-bg-2: #94A3B8;
+    --semi-color-bg-3: #64748B;
+
+    /* 文字色 */
+    --semi-color-text-0: #475569;
+    --semi-color-text-1: #64748B;
+    --semi-color-text-2: #94A3B8;
+    --semi-color-text-3: #A3A3A3;
+
+    /* 边框色 — neumorphism 用阴影代替边框，但保留 1px 极淡边框供组件识别 */
+    --semi-color-border: rgba(100, 116, 139, 0.2);
+    --semi-color-border-hover: rgba(100, 116, 139, 0.4);
+
+    /* 填充色 */
+    --semi-color-fill-0: #CBD5E1;
+    --semi-color-fill-1: #94A3B8;
+    --semi-color-fill-2: #64748B;
+}
+
+/* ==================== Semi 组件阴影覆盖（亮色）==================== */
+[data-ui-theme="neumorphism"] {
+
+    /* 卡片 */
+    .semi-card,
+    .semi-card-outlined {
+        background: var(--card-bg);
+        border: none;
+        box-shadow: var(--card-shadow);
+        transition: all 0.3s ease;
+    }
+
+    .semi-card:hover {
+        box-shadow: var(--card-hover-shadow);
+    }
+
+    /* 输入框 */
+    .semi-input-wrapper,
+    .semi-input {
+        background: var(--input-bg);
+        border: none;
+        box-shadow: var(--shadow-inset-sm);
+    }
+
+    .semi-input-wrapper:focus-within {
+        box-shadow: var(--shadow-inset-md);
+    }
+
+    /* 按钮 */
+    .semi-button-primary {
+        background: var(--btn-primary-bg);
+        box-shadow: var(--btn-primary-shadow);
+        border: none;
+        color: #FFFFFF;
+    }
+
+    .semi-button-secondary,
+    .semi-button-tertiary {
+        background: var(--theme-bg-primary);
+        box-shadow: var(--theme-shadow-sm);
+        border: none;
+    }
+
+    .semi-button-secondary:hover,
+    .semi-button-tertiary:hover {
+        box-shadow: var(--theme-shadow-md);
+    }
+
+    /* 侧边栏 */
+    .semi-navigation-vertical .semi-navigation-item-selected {
+        background: var(--sidebar-item-active-bg);
+        color: var(--sidebar-item-active-color);
+        box-shadow: var(--shadow-inset-sm);
+    }
+
+    .semi-navigation-vertical .semi-navigation-item:hover {
+        background: var(--sidebar-item-hover-bg);
+        box-shadow: var(--theme-shadow-sm);
+    }
+
+    /* 头部 */
+    .semi-layout-header {
+        background: var(--header-bg);
+        border-bottom: none;
+        box-shadow: var(--theme-shadow-sm);
+    }
+
+    /* 表格 */
+    .semi-table-thead .semi-table-th {
+        background: var(--theme-bg-secondary);
+        border-bottom: 1px solid rgba(100, 116, 139, 0.2);
+    }
+
+    /* 标签 */
+    .semi-tag {
+        background: var(--theme-bg-primary);
+        box-shadow: var(--theme-shadow-sm);
+        border: none;
+    }
+}
+
+/* ==================== 暗色模式 ==================== */
+:root[data-ui-theme="neumorphism"][theme-mode="dark"],
+[data-ui-theme="neumorphism"][theme-mode="dark"] {
+    --theme-primary: #94A3B8;
+    --theme-primary-hover: #64748B;
+    --theme-primary-active: #475569;
+    --theme-primary-light: rgba(148, 163, 184, 0.15);
+    --theme-primary-rgb: 148, 163, 184;
+
+    --theme-secondary: #64748B;
+    --theme-secondary-hover: #475569;
+    --theme-secondary-light: rgba(100, 116, 139, 0.15);
+
+    --theme-bg-primary: #1E293B;
+    --theme-bg-secondary: #334155;
+    --theme-bg-tertiary: #475569;
+    --theme-bg-gradient: linear-gradient(135deg, #1E293B 0%, #334155 100%);
+
+    --theme-text-primary: #E2E8F0;
+    --theme-text-secondary: #94A3B8;
+    --theme-text-tertiary: #64748B;
+
+    --theme-border: transparent;
+    --theme-border-light: transparent;
+
+    --theme-shadow-sm: 4px 4px 8px #0f172a, -4px -4px 8px #334155;
+    --theme-shadow-md: 6px 6px 12px #0f172a, -6px -6px 12px #334155;
+    --theme-shadow-lg: 8px 8px 16px #0f172a, -8px -8px 16px #334155;
+
+    --shadow-inset-sm: inset 4px 4px 8px #0f172a, inset -4px -4px 8px #334155;
+    --shadow-inset-md: inset 6px 6px 12px #0f172a, inset -6px -6px 12px #334155;
+    --shadow-inset-lg: inset 8px 8px 16px #0f172a, inset -8px -8px 16px #334155;
+
+    --sidebar-bg: #1E293B;
+    --sidebar-item-hover-bg: #334155;
+    --sidebar-item-active-bg: #94A3B8;
+    --sidebar-item-active-color: #1E293B;
+
+    --header-bg: #1E293B;
+    --header-border: transparent;
+
+    --card-bg: #1E293B;
+    --card-border: transparent;
+    --card-shadow: 6px 6px 12px #0f172a, -6px -6px 12px #334155;
+    --card-hover-shadow: 8px 8px 16px #0f172a, -8px -8px 16px #334155;
+
+    --input-bg: #334155;
+    --input-border: transparent;
+    --input-focus-border: #94A3B8;
+    --input-focus-shadow: inset 4px 4px 8px #0f172a, inset -4px -4px 8px #334155;
+}
+
+/* ==================== Semi Design 暗色变量 ==================== */
+[data-ui-theme="neumorphism"][theme-mode="dark"] {
+    --semi-color-primary: #94A3B8;
+    --semi-color-primary-hover: #64748B;
+    --semi-color-primary-active: #475569;
+    --semi-color-primary-light-default: rgba(148, 163, 184, 0.15);
+    --semi-color-primary-light-hover: rgba(148, 163, 184, 0.22);
+    --semi-color-primary-light-active: rgba(148, 163, 184, 0.3);
+
+    --semi-color-bg-0: #1E293B;
+    --semi-color-bg-1: #334155;
+    --semi-color-bg-2: #475569;
+    --semi-color-bg-3: #64748B;
+
+    --semi-color-text-0: #E2E8F0;
+    --semi-color-text-1: #CBD5E1;
+    --semi-color-text-2: #94A3B8;
+    --semi-color-text-3: #64748B;
+
+    --semi-color-border: rgba(148, 163, 184, 0.15);
+    --semi-color-border-hover: rgba(148, 163, 184, 0.3);
+
+    --semi-color-fill-0: rgba(255, 255, 255, 0.05);
+    --semi-color-fill-1: rgba(255, 255, 255, 0.08);
+    --semi-color-fill-2: rgba(255, 255, 255, 0.12);
+}
+
+/* ==================== Semi 组件阴影覆盖（暗色）==================== */
+[data-ui-theme="neumorphism"][theme-mode="dark"] {
+
+    /* 卡片 */
+    .semi-card,
+    .semi-card-outlined {
+        background: var(--card-bg);
+        border: none;
+        box-shadow: var(--card-shadow);
+    }
+
+    /* 输入框 */
+    .semi-input-wrapper,
+    .semi-input {
+        background: var(--input-bg);
+        border: none;
+        box-shadow: var(--shadow-inset-sm);
+    }
+
+    .semi-input-wrapper:focus-within {
+        box-shadow: var(--shadow-inset-md);
+    }
+
+    /* 按钮 */
+    .semi-button-secondary,
+    .semi-button-tertiary {
+        background: var(--theme-bg-secondary);
+        box-shadow: var(--theme-shadow-sm);
+        border: none;
+    }
+
+    /* 头部 */
+    .semi-layout-header {
+        background: var(--header-bg);
+        border-bottom: none;
+        box-shadow: var(--theme-shadow-sm);
+    }
+}
+
+/* ==================== 全局背景 ==================== */
+[data-ui-theme="neumorphism"] body {
+    background: var(--theme-bg-gradient);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* 新拟态装饰 */
+[data-ui-theme="neumorphism"] body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(circle at 20% 80%, rgba(100, 116, 139, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 80% 20%, rgba(148, 163, 184, 0.1) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* 卡片网格布局 */
+[data-ui-theme="neumorphism"] .card-grid {
+    display: grid;
+    gap: 24px;
+}
+
+[data-ui-theme="neumorphism"] .card-grid .semi-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-ui-theme="neumorphism"] .card-grid .semi-card:hover {
+    transform: translateY(-6px);
+}
+
+/* 按钮组 */
+[data-ui-theme="neumorphism"] .semi-button-group .semi-button {
+    margin: 0 4px;
+}
+
+[data-ui-theme="neumorphism"] .semi-button-group .semi-button:hover {
+    transform: scale(1.05);
+}
+
+/* 动画效果 */
+[data-ui-theme="neumorphism"] .fade-in {
+    animation: neumorphism-fadeIn 0.3s ease;
+}
+
+@keyframes neumorphism-fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+[data-ui-theme="neumorphism"] .slide-in {
+    animation: neumorphism-slideIn 0.3s ease;
+}
+
+@keyframes neumorphism-slideIn {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+[data-ui-theme="neumorphism"] .scale-in {
+    animation: neumorphism-scaleIn 0.3s ease;
+}
+
+@keyframes neumorphism-scaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

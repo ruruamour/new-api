@@ -67,8 +67,14 @@ func Distribute() func(c *gin.Context) {
 				if !ok {
 					tokenModelLimit = map[string]bool{}
 				}
-				matchName := ratio_setting.FormatMatchingModelName(modelRequest.Model) // match gpts & thinking-*
-				if _, ok := tokenModelLimit[matchName]; !ok {
+				matched := false
+				for _, matchName := range ratio_setting.GetMatchingModelNames(modelRequest.Model) {
+					if _, ok := tokenModelLimit[matchName]; ok {
+						matched = true
+						break
+					}
+				}
+				if !matched {
 					abortWithOpenAiMessage(c, http.StatusForbidden, i18n.T(c, i18n.MsgDistributorTokenModelForbidden, map[string]any{"Model": modelRequest.Model}))
 					return
 				}
@@ -101,8 +107,13 @@ func Distribute() func(c *gin.Context) {
 
 				if preferredChannelID, found := service.GetPreferredChannelByAffinity(c, modelRequest.Model, usingGroup); found {
 					preferred, err := model.CacheGetChannel(preferredChannelID)
-					if err == nil && preferred != nil && preferred.Status == common.ChannelStatusEnabled {
-						if usingGroup == "auto" {
+					if err == nil && preferred != nil {
+						if preferred.Status != common.ChannelStatusEnabled {
+							if service.ShouldSkipRetryAfterChannelAffinityFailure(c) {
+								abortWithOpenAiMessage(c, http.StatusForbidden, i18n.T(c, i18n.MsgDistributorChannelDisabled))
+								return
+							}
+						} else if usingGroup == "auto" {
 							userGroup := common.GetContextKeyString(c, constant.ContextKeyUserGroup)
 							autoGroups := service.GetUserAutoGroup(userGroup)
 							for _, g := range autoGroups {

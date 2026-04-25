@@ -56,7 +56,8 @@ export const ThemeProvider = ({ children }) => {
   const [systemTheme, setSystemTheme] = useState(getSystemTheme());
 
   // 计算实际应用的主题
-  const actualTheme = theme === 'auto' ? systemTheme : theme;
+  // TODO: 夜间模式适配完成后移除强制浅色模式
+  const actualTheme = 'light'; // 强制浅色模式
 
   // 监听系统主题变化
   useEffect(() => {

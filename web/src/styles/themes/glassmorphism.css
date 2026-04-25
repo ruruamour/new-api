@@ -1,0 +1,431 @@
+/*
+Copyright (C) 2025 QuantumNous
+
+Theme: Glassmorphism (玻璃拟态)
+Style: 现代、通透、层次感
+特点: backdrop-filter blur、半透明、渐变背景
+*/
+
+/* ==================== 亮色模式 ==================== */
+:root[data-ui-theme="glassmorphism"],
+[data-ui-theme="glassmorphism"] {
+    /* 主色调 - 靛蓝 */
+    --theme-primary: #6366F1;
+    --theme-primary-hover: #818CF8;
+    --theme-primary-active: #4F46E5;
+    --theme-primary-light: rgba(99, 102, 241, 0.15);
+    --theme-primary-rgb: 99, 102, 241;
+
+    /* 辅助色 */
+    --theme-secondary: #8B5CF6;
+    --theme-secondary-hover: #A78BFA;
+    --theme-secondary-light: rgba(139, 92, 246, 0.15);
+
+    /* 背景色 - 渐变背景 */
+    --theme-bg-primary: #FFFFFF;
+    --theme-bg-secondary: #F8FAFC;
+    --theme-bg-tertiary: #F1F5F9;
+    --theme-bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+    /* 文字色 */
+    --theme-text-primary: #1E293B;
+    --theme-text-secondary: #64748B;
+    --theme-text-tertiary: #94A3B8;
+
+    /* 边框 */
+    --theme-border: rgba(99, 102, 241, 0.35);
+    --theme-border-light: rgba(99, 102, 241, 0.15);
+
+    /* 状态色 */
+    --theme-success: #10B981;
+    --theme-warning: #F59E0B;
+    --theme-danger: #EF4444;
+    --theme-info: #6366F1;
+
+    /* 圆角 */
+    --theme-radius-sm: 8px;
+    --theme-radius-md: 12px;
+    --theme-radius-lg: 16px;
+    --theme-radius-xl: 24px;
+
+    /* 阴影 */
+    --theme-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --theme-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.1);
+    --theme-shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+
+    /* 玻璃效果 */
+    --glass-bg: rgba(255, 255, 255, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    --glass-blur: blur(20px);
+
+    /* 侧边栏 */
+    --sidebar-bg: rgba(255, 255, 255, 0.8);
+    --sidebar-item-hover-bg: rgba(99, 102, 241, 0.1);
+    --sidebar-item-active-bg: rgba(99, 102, 241, 0.9);
+    --sidebar-item-active-color: #FFFFFF;
+
+    /* 头部 */
+    --header-bg: rgba(255, 255, 255, 0.8);
+    --header-border: rgba(255, 255, 255, 0.3);
+
+    /* 卡片 */
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --card-border: rgba(255, 255, 255, 0.3);
+    --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    --card-hover-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+
+    /* 按钮 */
+    --btn-primary-bg: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+    --btn-primary-hover-bg: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+    --btn-primary-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+
+    /* 输入框 */
+    --input-bg: rgba(255, 255, 255, 0.5);
+    --input-border: rgba(255, 255, 255, 0.3);
+    --input-focus-border: #6366F1;
+    --input-focus-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+/* ==================== Semi Design 变量覆盖 ==================== */
+[data-ui-theme="glassmorphism"] {
+    /* 主色 */
+    --semi-color-primary: #6366F1;
+    --semi-color-primary-hover: #818CF8;
+    --semi-color-primary-active: #4F46E5;
+    --semi-color-primary-light-default: rgba(99, 102, 241, 0.15);
+    --semi-color-primary-light-hover: rgba(99, 102, 241, 0.22);
+    --semi-color-primary-light-active: rgba(99, 102, 241, 0.3);
+
+    /* 背景色 */
+    --semi-color-bg-0: #FFFFFF;
+    --semi-color-bg-1: #F8FAFC;
+    --semi-color-bg-2: #F1F5F9;
+    --semi-color-bg-3: #E2E8F0;
+
+    /* 文字色 */
+    --semi-color-text-0: #1E293B;
+    --semi-color-text-1: #334155;
+    --semi-color-text-2: #64748B;
+    --semi-color-text-3: #94A3B8;
+
+    /* 边框色 */
+    --semi-color-border: rgba(99, 102, 241, 0.35);
+    --semi-color-border-hover: rgba(99, 102, 241, 0.55);
+
+    /* 填充色 */
+    --semi-color-fill-0: rgba(255, 255, 255, 0.5);
+    --semi-color-fill-1: rgba(255, 255, 255, 0.3);
+    --semi-color-fill-2: rgba(255, 255, 255, 0.2);
+}
+
+/* ==================== 暗色模式 ==================== */
+:root[data-ui-theme="glassmorphism"][theme-mode="dark"],
+[data-ui-theme="glassmorphism"][theme-mode="dark"] {
+    --theme-primary: #818CF8;
+    --theme-primary-hover: #A5B4FC;
+    --theme-primary-active: #6366F1;
+    --theme-primary-light: rgba(129, 140, 248, 0.15);
+    --theme-primary-rgb: 129, 140, 248;
+
+    --theme-secondary: #A78BFA;
+    --theme-secondary-hover: #C4B5FD;
+    --theme-secondary-light: rgba(167, 139, 250, 0.15);
+
+    --theme-bg-primary: #0F172A;
+    --theme-bg-secondary: #1E293B;
+    --theme-bg-tertiary: #334155;
+    --theme-bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+
+    --theme-text-primary: #F1F5F9;
+    --theme-text-secondary: #94A3B8;
+    --theme-text-tertiary: #64748B;
+
+    --theme-border: rgba(255, 255, 255, 0.1);
+    --theme-border-light: rgba(255, 255, 255, 0.05);
+
+    /* 暗色玻璃效果 */
+    --glass-bg: rgba(30, 41, 59, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+    --sidebar-bg: rgba(30, 41, 59, 0.85);
+    --sidebar-item-hover-bg: rgba(129, 140, 248, 0.15);
+    --sidebar-item-active-bg: rgba(99, 102, 241, 0.9);
+
+    --header-bg: rgba(30, 41, 59, 0.85);
+    --header-border: rgba(255, 255, 255, 0.1);
+
+    --card-bg: rgba(30, 41, 59, 0.7);
+    --card-border: rgba(255, 255, 255, 0.15);
+    --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --card-hover-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+
+    --input-bg: rgba(30, 41, 59, 0.5);
+    --input-border: rgba(255, 255, 255, 0.15);
+    --input-focus-border: #818CF8;
+    --input-focus-shadow: 0 0 0 3px rgba(129, 140, 248, 0.2);
+}
+
+/* ==================== Semi Design 暗色变量 ==================== */
+[data-ui-theme="glassmorphism"][theme-mode="dark"] {
+    --semi-color-primary: #818CF8;
+    --semi-color-primary-hover: #A5B4FC;
+    --semi-color-primary-active: #6366F1;
+    --semi-color-primary-light-default: rgba(129, 140, 248, 0.15);
+    --semi-color-primary-light-hover: rgba(129, 140, 248, 0.22);
+    --semi-color-primary-light-active: rgba(129, 140, 248, 0.3);
+
+    --semi-color-bg-0: #0F172A;
+    --semi-color-bg-1: #1E293B;
+    --semi-color-bg-2: #334155;
+    --semi-color-bg-3: #475569;
+
+    --semi-color-text-0: #F1F5F9;
+    --semi-color-text-1: #E2E8F0;
+    --semi-color-text-2: #94A3B8;
+    --semi-color-text-3: #64748B;
+
+    --semi-color-border: rgba(255, 255, 255, 0.1);
+    --semi-color-border-hover: rgba(255, 255, 255, 0.2);
+
+    --semi-color-fill-0: rgba(255, 255, 255, 0.05);
+    --semi-color-fill-1: rgba(255, 255, 255, 0.08);
+    --semi-color-fill-2: rgba(255, 255, 255, 0.12);
+}
+
+/* ==================== 全局背景 ==================== */
+[data-ui-theme="glassmorphism"] body {
+    background: var(--theme-bg-gradient);
+    min-height: 100vh;
+    transition: background 0.5s ease;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* ==================== 背景装饰 ==================== */
+[data-ui-theme="glassmorphism"] body::before,
+[data-ui-theme="glassmorphism"] body::after {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+    animation: glassmorphism-float 20s infinite alternate ease-in-out;
+}
+
+[data-ui-theme="glassmorphism"] body::before {
+    top: -10%;
+    left: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: linear-gradient(45deg, #6366F1, #8B5CF6);
+    opacity: 0.3;
+}
+
+[data-ui-theme="glassmorphism"] body::after {
+    bottom: -10%;
+    right: -10%;
+    width: 60vw;
+    height: 60vw;
+    background: linear-gradient(45deg, #EC4899, #8B5CF6);
+    opacity: 0.25;
+    animation-delay: -10s;
+}
+
+/* ==================== 暗色背景装饰 ==================== */
+[data-ui-theme="glassmorphism"][theme-mode="dark"] body::before {
+    background: linear-gradient(45deg, #6366F1, #A78BFA);
+    opacity: 0.2;
+}
+
+[data-ui-theme="glassmorphism"][theme-mode="dark"] body::after {
+    background: linear-gradient(45deg, #EC4899, #6366F1);
+    opacity: 0.15;
+}
+
+/* ==================== 动画 ==================== */
+@keyframes glassmorphism-float {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    33% {
+        transform: translate(30px, -50px) scale(1.1);
+    }
+
+    66% {
+        transform: translate(-20px, 20px) scale(0.9);
+    }
+
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+}
+
+@keyframes glassmorphism-pulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* ==================== 全局样式 ==================== */
+[data-ui-theme="glassmorphism"] {
+
+    /* 卡片样式 */
+    .semi-card,
+    .semi-card-outlined {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        box-shadow: var(--card-shadow);
+        backdrop-filter: var(--glass-blur);
+        transition: all 0.3s ease;
+    }
+
+    .semi-card:hover {
+        box-shadow: var(--card-hover-shadow);
+        border-color: var(--theme-primary);
+    }
+
+    /* 按钮样式 */
+    .semi-button-primary {
+        background: var(--btn-primary-bg);
+        border: none;
+        box-shadow: var(--btn-primary-shadow);
+        transition: all 0.3s ease;
+    }
+
+    .semi-button-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+    }
+
+    /* 输入框样式 */
+    .semi-input,
+    .semi-textarea {
+        background: var(--input-bg);
+        border: 1px solid var(--input-border);
+        backdrop-filter: var(--glass-blur);
+        transition: all 0.3s ease;
+    }
+
+    .semi-input:focus,
+    .semi-textarea:focus {
+        border-color: var(--input-focus-border);
+        box-shadow: var(--input-focus-shadow);
+    }
+
+    /* 侧边栏样式 */
+    .semi-navigation-vertical .semi-navigation-item-selected {
+        background: var(--sidebar-item-active-bg);
+        color: var(--sidebar-item-active-color);
+    }
+
+    .semi-navigation-vertical .semi-navigation-item:hover {
+        background: var(--sidebar-item-hover-bg);
+    }
+
+    /* 头部样式 */
+    .semi-layout-header {
+        background: var(--header-bg);
+        border-bottom: 1px solid var(--header-border);
+        backdrop-filter: var(--glass-blur);
+    }
+
+    /* 标签样式 */
+    .semi-tag {
+        background: var(--theme-primary-light);
+        border: 1px solid var(--theme-primary);
+        color: var(--theme-primary);
+    }
+
+    /* 表格样式 */
+    .semi-table-thead .semi-table-th {
+        background: var(--theme-bg-secondary);
+        border-bottom: 1px solid var(--theme-border);
+    }
+
+    .semi-table-tbody .semi-table-tr:hover .semi-table-td {
+        background: var(--theme-primary-light);
+    }
+}
+
+/* ==================== 暗色全局样式 ==================== */
+[data-ui-theme="glassmorphism"][theme-mode="dark"] {
+
+    /* 卡片样式 */
+    .semi-card,
+    .semi-card-outlined {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        box-shadow: var(--card-shadow);
+    }
+
+    /* 按钮样式 */
+    .semi-button-primary {
+        background: var(--btn-primary-bg);
+        box-shadow: var(--btn-primary-shadow);
+    }
+
+    /* 输入框样式 */
+    .semi-input,
+    .semi-textarea {
+        background: var(--input-bg);
+        border: 1px solid var(--input-border);
+    }
+
+    /* 侧边栏样式 */
+    .semi-navigation-vertical .semi-navigation-item-selected {
+        background: var(--sidebar-item-active-bg);
+        color: var(--sidebar-item-active-color);
+    }
+
+    /* 头部样式 */
+    .semi-layout-header {
+        background: var(--header-bg);
+        border-bottom: 1px solid var(--header-border);
+    }
+}
+
+/* ==================== 动画 ==================== */
+@keyframes glassmorphism-fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glassmorphism-slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes glassmorphism-scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
